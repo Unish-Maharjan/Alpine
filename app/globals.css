@@ -1,26 +1,144 @@
 @import "tailwindcss";
 
+@theme {
+  --font-marcellus: var(--font-marcellus), serif;
+  --font-saldo: "Saldo Regular", "Saldo", "saldo-regular", var(--font-marcellus), serif;
+  --font-inter: var(--font-inter), sans-serif;
+
+  --color-primary: #0c3b3c;
+  --color-primary-deep: #072526;
+  --color-primary-light: #124d4e;
+  --color-primary-surface: #0f4445;
+  --color-primary-border: #1a585a;
+
+  --color-secondary: #eadab2;
+  --color-secondary-light: #fbf5e6;
+  --color-secondary-dark: #c9b687;
+  --color-secondary-muted: #baa674;
+
+  --color-alpine: #0c3b3c;
+  --color-alpine-deep: #072526;
+  --color-alpine-light: #124d4e;
+  --color-alpine-surface: #0f4445;
+  --color-alpine-border: #1a585a;
+
+  --color-gold: #eadab2;
+  --color-gold-light: #fbf5e6;
+  --color-gold-dark: #c9b687;
+  --color-gold-muted: #baa674;
+
+  --color-offwhite: #f8f6f0;
+  --color-offwhite-pure: #fcfbf8;
+  --color-offwhite-cream: #f4efe6;
+  --color-offwhite-muted: #d8d2c4;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #0c3b3c;
+  --color-secondary: #eadab2;
+  --bg-alpine: #0c3b3c;
+  --color-gold: #eadab2;
+  --color-offwhite: #f8f6f0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0c3b3c;
+  color: #f8f6f0;
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+}
+
+p {
+  font-family: var(--font-inter), sans-serif;
+}
+
+::selection {
+  background-color: #eadab2;
+  color: #0c3b3c;
+}
+
+/* ─── Luxury gold text gradient ───────────────────────────── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #fbf5e6 0%, #eadab2 50%, #c9b687 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gold-shimmer {
+  background: linear-gradient(90deg, #eadab2 0%, #ffffff 30%, #eadab2 60%, #c9b687 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 8s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.border-gold-subtle {
+  border-color: rgba(234, 218, 178, 0.22);
+}
+
+.border-gold-glow {
+  border-color: #eadab2;
+  box-shadow: 0 0 20px rgba(234, 218, 178, 0.2);
+}
+
+.bg-alpine-radial {
+  background: radial-gradient(circle at 50% 30%, #134e4f 0%, #0c3b3c 65%, #062324 100%);
+}
+
+.bg-alpine-card {
+  background: linear-gradient(180deg, rgba(16, 70, 71, 0.7) 0%, rgba(12, 59, 60, 0.9) 100%);
+  backdrop-filter: blur(12px);
+}
+
+/* ─── CSS Parallax Utilities ──────────────────────────────── */
+
+/* Perspective container — attach to section */
+.parallax-scene {
+  perspective: 1000px;
+  perspective-origin: 50% 40%;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+/* Parallax depth layers — add to children for CSS-only depth */
+.parallax-slow   { will-change: transform; }
+.parallax-medium { will-change: transform; }
+.parallax-fast   { will-change: transform; }
+
+/* Floating grain texture overlay for depth */
+.parallax-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+
+/* Reveal-on-scroll fade+slide — triggered via GSAP */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
 }
