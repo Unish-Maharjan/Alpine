@@ -89,17 +89,17 @@ const Footer = () => {
         {/* Main Footer Content */}
         <div
           ref={navRef}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-10 py-10 border-b border-[#eadab2]/15 text-sm"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 py-10 border-b border-[#eadab2]/15 text-sm"
         >
           {/* Brand & Store Info Column */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="sm:col-span-2 lg:col-span-5 space-y-6">
             <div className="flex items-center gap-3">
               <Image
                 src="/logo/logo1.webp"
                 alt="Alpine Timepieces Logo"
                 width={180}
                 height={45}
-                className="h-9 w-auto object-contain brightness-0 invert"
+                className="h-8 sm:h-9 w-auto object-contain brightness-0 invert"
               />
             </div>
 
@@ -160,7 +160,7 @@ const Footer = () => {
           </div>
 
           {/* LEGAL & FOLLOW US */}
-          <div className="lg:col-span-2 -translate-x-10 space-y-6">
+          <div className="lg:col-span-2 space-y-6">
             <div>
               <h5 className="font-saldo text-xs font-semibold uppercase text-[#eadab2] mb-4">
                 LEGAL
@@ -201,8 +201,10 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="translate-y-40 h-auto w-50">
-            <Image src="/logo/logo.webp" alt="logo" width={300} height={300} />
+          <div className="lg:col-span-2 translate-y-20 flex items-center justify-start lg:justify-end opacity-80 
+          pt-4 lg:pt-0">
+            <Image src="/logo/logo.webp" alt="Alpine Timepieces" width={160} height={40} 
+            className="w-36 h-auto object-contain" />
           </div>
         </div>
 

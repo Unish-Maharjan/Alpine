@@ -14,15 +14,16 @@ const DESC_TEXT =
 
 const LogoSection = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLSpanElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || !contentRef.current) return;
 
-      // Pin section and scrub word reveal timeline cleanly across scroll
+      // Pin section and scrub content reveal timeline from bottom across scroll
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -34,29 +35,33 @@ const LogoSection = () => {
         },
       });
 
-      tl.from(badgeRef.current, { y: 20, opacity: 0, duration: 0.3 })
-        .from(logoRef.current, { scale: 0.8, opacity: 0, duration: 0.5 }, "-=0.1")
+      tl.fromTo(
+        contentRef.current,
+        { y: 140, opacity: 0 },
+        { y: 0, opacity: 1, ease: "power2.out", duration: 0.8 }
+      )
+        .from(logoRef.current, { scale: 0.8, opacity: 0, duration: 0.5 }, "-=0.4")
         .from(
           ".word-headline",
           {
             opacity: 0,
-            y: 25,
+            y: 30,
             stagger: 0.08,
             duration: 0.8,
           },
-          "-=0.2"
+          "-=0.3"
         )
         .from(
           ".word-desc",
           {
             opacity: 0,
-            y: 15,
+            y: 20,
             stagger: 0.04,
             duration: 0.8,
           },
-          "-=0.3"
+          "-=0.4"
         )
-        .from(statsRef.current, { y: 25, opacity: 0, duration: 0.5 }, "-=0.2");
+        .from(statsRef.current, { y: 30, opacity: 0, duration: 0.5 }, "-=0.3");
     },
     { scope: containerRef }
   );
@@ -67,7 +72,10 @@ const LogoSection = () => {
       id="about"
       className="relative w-full bg-[#0c3b3c] text-[#fcfbf8] py-24 px-6 sm:px-12 lg:px-16 border-y border-[#eadab2]/15 overflow-hidden"
     >
-      <div className="relative max-w-5xl mx-auto flex flex-col items-center text-center z-10">
+      <div
+        ref={contentRef}
+        className="relative max-w-5xl mx-auto flex flex-col items-center text-center z-10"
+      >
      
 
         {/* Logo Emblem */}

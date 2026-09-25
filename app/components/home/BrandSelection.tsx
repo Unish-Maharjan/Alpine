@@ -2,10 +2,14 @@ import React from "react";
 import Image from "next/image";
 
 const BRAND_LOGOS = [
-  { name: "Citizen", tag: "Eco-Drive Precision", logo: "/logo/citizen.png" },
+  { name: "Citizen", tag: "Eco-Drive Precision", logo: "/logo/Rhythm.png" },
   { name: "Rhythm", tag: "Master Clockmakers", logo: "/logo/Rhythm.png" },
-  { name: "Daniel Klein", tag: "Modern Elegance", logo: "/logo/danielklein.png" },
-  { name: "Q&Q", tag: "Quality & Style", logo: "/logo/q&q.png" },
+  { name: "Daniel Klein", tag: "Modern Elegance", logo: "/logo/Rhythm.png" },
+  { name: "Q&Q", tag: "Quality & Style", logo: "/logo/Rhythm.png" },
+  { name: "Casio", tag: "Pioneer in Digital", logo: "/logo/Rhythm.png" },
+  { name: "G-SHOCK", tag: "Absolute Toughness", logo: "/logo/Rhythm.png" },
+  { name: "Alpine Atelier", tag: "Swiss Fine Horology", logo: "/logo/Rhythm.png" },
+  { name: "Grand Edition", tag: "Complicated Timepieces", logo: "/logo/Rhythm.png" },
 ];
 
 export default function BrandSelection() {
@@ -24,29 +28,27 @@ export default function BrandSelection() {
           </p>
         </div>
 
-        {/* Luxury 4-Column Card Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {BRAND_LOGOS.map((brand) => (
+        {/* 2 Rows x 4 Columns Card Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {BRAND_LOGOS.map((brand, idx) => (
             <div
-              key={brand.name}
+              key={`${brand.name}-${idx}`}
               className="bg-primary border border-[#eadab2]/30 p-8 flex flex-col justify-between text-center rounded-sm relative overflow-hidden group shadow-lg"
             >
               {/* Subtle metallic top accent line */}
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#eadab2]/40 to-transparent" />
 
-              <div className="flex flex-col items-center w-full">
-                {/* Logo Showcase Area - Focus on Logo */}
-               
-                  <Image
-                    src={brand.logo}
-                    alt={`${brand.name} Logo`}
-                    width={260}
-                    height={120}
-                    className="max-h-24 w-auto object-contain brightness-0 invert opacity-100"
-                  />
+              <div className="flex flex-col items-center justify-center w-full min-h-[90px]">
+                <Image
+                  src={brand.logo}
+                  alt={`${brand.name} Logo`}
+                  width={260}
+                  height={120}
+                  className="max-h-20 w-auto object-contain brightness-0 invert opacity-100"
+                />
               </div>
 
-              {/* Card Footer Button Action */}
+              {/* Card Footer Action */}
               <div className="mt-8 pt-4 border-t border-[#eadab2]/20 flex items-center justify-center">
                 <span className="font-inter text-[11px] text-[#eadab2] uppercase tracking-widest font-medium">
                   Explore Collection
