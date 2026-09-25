@@ -45,25 +45,25 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
           <nav className="hidden lg:flex items-center space-x-10">
             <Link
               href="#products"
-              className="font-saldo text-xs tracking-[0.22em] uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#eadab2] hover:after:w-full after:transition-all after:duration-300"
+              className="font-saldo text-xs uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#eadab2] hover:after:w-full after:transition-all after:duration-300"
             >
               Home
             </Link>
             <Link
               href="#products"
-              className="font-saldo text-xs tracking-[0.22em] uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#eadab2] hover:after:w-full after:transition-all after:duration-300"
+              className="font-saldo text-xs uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#eadab2] hover:after:w-full after:transition-all after:duration-300"
             >
               Timepieces
             </Link>
             <Link
               href="#priorities"
-              className="font-saldo text-xs tracking-[0.22em] uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#eadab2] hover:after:w-full after:transition-all after:duration-300"
+              className="font-saldo text-xs uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#eadab2] hover:after:w-full after:transition-all after:duration-300"
             >
               Maison
             </Link>
             <Link
               href="#contact"
-              className="font-saldo text-xs tracking-[0.22em] uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#eadab2] hover:after:w-full after:transition-all after:duration-300"
+              className="font-saldo text-xs uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#eadab2] hover:after:w-full after:transition-all after:duration-300"
             >
               Contact Us
             </Link>
@@ -99,28 +99,28 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
           <Link
             href="#products"
             onClick={() => setMobileMenuOpen(false)}
-            className="block font-saldo text-sm tracking-[0.2em] uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] py-2"
+            className="block font-saldo text-sm uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] py-2"
           >
             Timepieces
           </Link>
           <Link
             href="#products"
             onClick={() => setMobileMenuOpen(false)}
-            className="block font-saldo text-sm tracking-[0.2em] uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] py-2"
+            className="block font-saldo text-sm uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] py-2"
           >
             Collections
           </Link>
           <Link
             href="#priorities"
             onClick={() => setMobileMenuOpen(false)}
-            className="block font-saldo text-sm tracking-[0.2em] uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] py-2"
+            className="block font-saldo text-sm uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] py-2"
           >
             Craftsmanship &amp; Priorities
           </Link>
           <Link
             href="#contact"
             onClick={() => setMobileMenuOpen(false)}
-            className="block font-saldo text-sm tracking-[0.2em] uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] py-2"
+            className="block font-saldo text-sm uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] py-2"
           >
             Contact Us
           </Link>

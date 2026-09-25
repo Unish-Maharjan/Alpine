@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useRef } from "react";
 import Button from "@/app/ui/Button";
@@ -92,10 +92,10 @@ const Products = () => {
 
       {/* Section Header */}
       <div ref={headerRef} className="text-center max-w-3xl mx-auto px-4 mb-20 lg:mb-28 relative z-10">
-        <span className="font-saldo text-xs sm:text-sm tracking-[0.35em] text-[#eadab2] uppercase block font-medium mb-4">
+        <span className="font-saldo text-xs sm:text-sm text-[#eadab2] uppercase block font-medium mb-4">
           Alpine Timepieces
         </span>
-        <h2 className="font-saldo text-3xl sm:text-5xl md:text-6xl tracking-[0.16em] text-[#fcfbf8] uppercase font-normal">
+        <h2 className="font-saldo text-3xl sm:text-5xl md:text-6xl text-[#fcfbf8] uppercase font-normal">
           OUR PRODUCTS
         </h2>
       </div>
@@ -105,13 +105,9 @@ const Products = () => {
         <div ref={row1Ref} className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-20">
           {/* Left: Text Content */}
           <div className="flex flex-col justify-center space-y-7 bg-[#0c3b3c] p-2 sm:p-6 lg:p-8">
-            <span className="font-saldo text-xs tracking-[0.3em] text-[#eadab2] uppercase">
-              Edition No. 01 &bull; Precious Metals
-            </span>
-
-            <h3 className="font-saldo text-3xl sm:text-4xl md:text-5xl tracking-[0.12em] leading-tight text-[#fcfbf8] uppercase font-normal">
+            <h3 className="font-saldo text-3xl sm:text-4xl md:text-5xl leading-tight text-[#fcfbf8] uppercase font-normal">
               UNCOMPROMISING
-              <span className="block mt-2 text-gold-gradient">LUXURY</span>
+              <span className="block mt-2">LUXURY</span>
             </h3>
 
             <p className="font-inter text-[#e5e0d3] text-base sm:text-lg leading-relaxed font-light max-w-xl">
@@ -124,18 +120,18 @@ const Products = () => {
             {/* Specs Grid */}
             <div className="grid grid-cols-2 gap-8 pt-2">
               <div className="border-l-2 border-[#eadab2] pl-4">
-                <span className="font-saldo text-2xl sm:text-3xl tracking-widest text-[#fcfbf8] block font-medium">
+                <span className="font-saldo text-2xl sm:text-3xl text-[#fcfbf8] block font-medium">
                   18K GOLD
                 </span>
-                <span className="font-inter text-[11px] tracking-[0.25em] text-[#eadab2] uppercase mt-1 block font-medium">
+                <span className="font-inter text-[11px] text-[#eadab2] uppercase mt-1 block font-medium">
                   CASE MATERIAL
                 </span>
               </div>
               <div className="border-l-2 border-[#eadab2] pl-4">
-                <span className="font-saldo text-2xl sm:text-3xl tracking-widest text-[#fcfbf8] block font-medium">
+                <span className="font-saldo text-2xl sm:text-3xl text-[#fcfbf8] block font-medium">
                   10 ATM
                 </span>
-                <span className="font-inter text-[11px] tracking-[0.25em] text-[#eadab2] uppercase mt-1 block font-medium">
+                <span className="font-inter text-[11px] text-[#eadab2] uppercase mt-1 block font-medium">
                   WATER RESISTANCE
                 </span>
               </div>
@@ -155,9 +151,6 @@ const Products = () => {
               autoPlay loop muted playsInline
               className="w-full h-full object-cover transition-transform duration-700"
             />
-            <div className="absolute top-4 right-4 bg-[#0c3b3c]/80 backdrop-blur-md px-3 py-1 border border-[#eadab2]/30 text-[10px] tracking-[0.2em] uppercase text-[#eadab2] font-saldo">
-              Swiss Made
-            </div>
           </div>
         </div>
 
@@ -170,20 +163,13 @@ const Products = () => {
               autoPlay loop muted playsInline
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute top-4 left-4 bg-[#0c3b3c]/80 backdrop-blur-md px-3 py-1 border border-[#eadab2]/30 text-[10px] tracking-[0.2em] uppercase text-[#eadab2] font-saldo">
-              In-House Movement
-            </div>
           </div>
 
           {/* Right: Text Content */}
           <div className="flex flex-col justify-center space-y-7 bg-[#0c3b3c] p-2 sm:p-6 lg:p-8 order-1 lg:order-2">
-            <span className="font-saldo text-xs tracking-[0.3em] text-[#eadab2] uppercase">
-              Edition No. 02 &bull; Chronometer Caliber
-            </span>
-
-            <h3 className="font-saldo text-3xl sm:text-4xl md:text-5xl tracking-[0.12em] leading-tight text-[#fcfbf8] uppercase font-normal">
+            <h3 className="font-saldo text-3xl sm:text-4xl md:text-5xl leading-tight text-[#fcfbf8] uppercase font-normal">
               METICULOUS
-              <span className="block mt-2 text-gold-gradient">ENGINEERING</span>
+              <span className="block mt-2">ENGINEERING</span>
             </h3>
 
             <p className="font-inter text-[#e5e0d3] text-base sm:text-lg leading-relaxed font-light max-w-xl">
@@ -196,18 +182,18 @@ const Products = () => {
             {/* Specs Grid */}
             <div className="grid grid-cols-2 gap-8 pt-2">
               <div className="border-l-2 border-[#eadab2] pl-4">
-                <span className="font-saldo text-2xl sm:text-3xl tracking-widest text-[#fcfbf8] block font-medium">
+                <span className="font-saldo text-2xl sm:text-3xl text-[#fcfbf8] block font-medium">
                   72 HOURS
                 </span>
-                <span className="font-inter text-[11px] tracking-[0.25em] text-[#eadab2] uppercase mt-1 block font-medium">
+                <span className="font-inter text-[11px] text-[#eadab2] uppercase mt-1 block font-medium">
                   POWER RESERVE
                 </span>
               </div>
-              <div className="border-l-2 border-[#eadab2] pl-4">
-                <span className="font-saldo text-2xl sm:text-3xl tracking-widest text-[#fcfbf8] block font-medium">
+              <div className="border-[#eadab2] border-l-2 pl-4">
+                <span className="font-saldo text-2xl sm:text-3xl text-[#fcfbf8] block font-medium">
                   28,800
                 </span>
-                <span className="font-inter text-[11px] tracking-[0.25em] text-[#eadab2] uppercase mt-1 block font-medium">
+                <span className="font-inter text-[11px] text-[#eadab2] uppercase mt-1 block font-medium">
                   VIBRATIONS / HOUR
                 </span>
               </div>
@@ -225,13 +211,9 @@ const Products = () => {
         <div ref={row3Ref} className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-20">
           {/* Left: Text Content */}
           <div className="flex flex-col justify-center space-y-7 bg-[#0c3b3c] p-2 sm:p-6 lg:p-8">
-            <span className="font-saldo text-xs tracking-[0.3em] text-[#eadab2] uppercase">
-              Edition No. 03 &bull; Haute Horlogerie
-            </span>
-
-            <h3 className="font-saldo text-3xl sm:text-4xl md:text-5xl tracking-[0.12em] leading-tight text-[#fcfbf8] uppercase font-normal">
+            <h3 className="font-saldo text-3xl sm:text-4xl md:text-5xl leading-tight text-[#fcfbf8] uppercase font-normal">
               TIMELESS
-              <span className="block mt-2 text-gold-gradient">CRAFTSMANSHIP</span>
+              <span className="block mt-2">CRAFTSMANSHIP</span>
             </h3>
 
             <p className="font-inter text-[#e5e0d3] text-base sm:text-lg leading-relaxed font-light max-w-xl">
@@ -244,18 +226,18 @@ const Products = () => {
             {/* Specs Grid */}
             <div className="grid grid-cols-2 gap-8 pt-2">
               <div className="border-l-2 border-[#eadab2] pl-4">
-                <span className="font-saldo text-2xl sm:text-3xl tracking-widest text-[#fcfbf8] block font-medium">
+                <span className="font-saldo text-2xl sm:text-3xl text-[#fcfbf8] block font-medium">
                   31 JEWELS
                 </span>
-                <span className="font-inter text-[11px] tracking-[0.25em] text-[#eadab2] uppercase mt-1 block font-medium">
+                <span className="font-inter text-[11px] text-[#eadab2] uppercase mt-1 block font-medium">
                   RUBY BEARINGS
                 </span>
               </div>
               <div className="border-l-2 border-[#eadab2] pl-4">
-                <span className="font-saldo text-2xl sm:text-3xl tracking-widest text-[#fcfbf8] block font-medium">
+                <span className="font-saldo text-2xl sm:text-3xl text-[#fcfbf8] block font-medium">
                   5 YEARS
                 </span>
-                <span className="font-inter text-[11px] tracking-[0.25em] text-[#eadab2] uppercase mt-1 block font-medium">
+                <span className="font-inter text-[11px] text-[#eadab2] uppercase mt-1 block font-medium">
                   GLOBAL GUARANTEE
                 </span>
               </div>
@@ -275,9 +257,6 @@ const Products = () => {
               autoPlay loop muted playsInline
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute top-4 right-4 bg-[#0c3b3c]/80 backdrop-blur-md px-3 py-1 border border-[#eadab2]/30 text-[10px] tracking-[0.2em] uppercase text-[#eadab2] font-saldo">
-              Limited Series
-            </div>
           </div>
         </div>
       </div>

@@ -21,9 +21,9 @@ type ClickButtonProps = BaseProps &
 type ButtonProps = LinkButtonProps | ClickButtonProps;
 
 const sizeStyles = {
-  sm: "px-6 py-2.5 text-[11px] tracking-[0.25em]",
-  md: "px-9 py-3.5 text-xs sm:text-xs tracking-[0.25em]",
-  lg: "px-11 py-4 text-xs sm:text-sm tracking-[0.25em]",
+  sm: "px-6 py-2.5 text-[11px]",
+  md: "px-9 py-3.5 text-xs sm:text-xs",
+  lg: "px-11 py-4 text-xs sm:text-sm",
 };
 
 const variantStyles = {

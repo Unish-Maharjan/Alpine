@@ -43,6 +43,15 @@
 
 html {
   scroll-behavior: smooth;
+  letter-spacing: normal;
+}
+
+*, *::before, *::after {
+  letter-spacing: normal !important;
+}
+
+*:focus, *:focus-visible {
+  outline: none !important;
 }
 
 body {

@@ -141,7 +141,7 @@ const Footer = () => {
 
           {/* OUR BRANDS */}
           <div className="lg:col-span-3">
-            <h5 className="font-saldo text-xs font-semibold tracking-[0.2em] uppercase text-[#eadab2] mb-4">
+            <h5 className="font-saldo text-xs font-semibold uppercase text-[#eadab2] mb-4">
               OUR BRANDS
             </h5>
             <ul className="space-y-2.5 font-inter text-xs text-[#d8d2c4]">
@@ -160,7 +160,7 @@ const Footer = () => {
 
           {/* OTHER LINKS */}
           <div className="lg:col-span-2">
-            <h5 className="font-saldo text-xs font-semibold tracking-[0.2em] uppercase text-[#eadab2] mb-4">
+            <h5 className="font-saldo text-xs font-semibold uppercase text-[#eadab2] mb-4">
               OTHER LINKS
             </h5>
             <ul className="space-y-2.5 font-inter text-xs text-[#d8d2c4]">
@@ -185,7 +185,7 @@ const Footer = () => {
           {/* LEGAL & FOLLOW US */}
           <div className="lg:col-span-2 space-y-6">
             <div>
-              <h5 className="font-saldo text-xs font-semibold tracking-[0.2em] uppercase text-[#eadab2] mb-4">
+              <h5 className="font-saldo text-xs font-semibold uppercase text-[#eadab2] mb-4">
                 LEGAL
               </h5>
               <ul className="space-y-2.5 font-inter text-xs text-[#d8d2c4]">
@@ -200,7 +200,7 @@ const Footer = () => {
             </div>
 
             <div>
-              <h5 className="font-saldo text-xs font-semibold tracking-[0.2em] uppercase text-[#eadab2] mb-3">
+              <h5 className="font-saldo text-xs font-semibold uppercase text-[#eadab2] mb-3">
                 FOLLOW US
               </h5>
               <div className="flex items-center gap-2.5 flex-wrap">

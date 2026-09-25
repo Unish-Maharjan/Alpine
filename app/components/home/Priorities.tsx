@@ -38,7 +38,7 @@ export default function Priorities() {
         {/* Left: Content Column */}
         <div ref={contentRef} className="flex flex-col items-center text-center max-w-xl mx-auto lg:mx-0">
           {/* Kicker */}
-          <p className="italic font-inter text-xs sm:text-sm tracking-[0.25em] text-[#eadab2]/85 mb-4">
+          <p className="italic font-inter text-xs sm:text-sm text-[#eadab2]/85 mb-4">
             Our Priorities
           </p>
 

@@ -50,7 +50,7 @@ const LogoSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-[#f8f6f0] text-[#0c3b3c] min-h-[70vh] md:min-h-[80vh] flex flex-col items-center justify-center overflow-hidden px-6 py-24 border-y border-[#eadab2]/30 parallax-grain"
+      className="relative w-full bg-[#f8f6f0] text-[#0c3b3c] min-h-screen md:min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 py-24 border-y border-[#eadab2]/30 parallax-grain"
     >
       {/* Centered Content Container */}
       <div className="relative flex flex-col items-center justify-center text-center max-w-4xl mx-auto z-10 px-4">
@@ -72,20 +72,13 @@ const LogoSection = () => {
         {/* Statement Headline — medium layer */}
         <h2
           ref={headlineRef}
-          className="font-saldo text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-[0.12em] text-[#0c3b3c] leading-[1.15] text-center uppercase parallax-medium"
+          className="font-saldo text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-normal text-[#0c3b3c] leading-[1.15] text-center uppercase parallax-medium"
         >
           Your Time
           <span className="block mt-1 sm:mt-2 text-[#91753c] font-light italic">
             Starts Here.
           </span>
         </h2>
-
-        {/* Fine gold divider line — fastest layer */}
-        <div ref={dividerRef} className="flex items-center gap-3 mt-8 parallax-fast">
-          <div className="w-12 h-[1px] bg-[#eadab2]" />
-          <div className="w-2 h-2 rotate-45 border border-[#91753c] bg-[#eadab2]" />
-          <div className="w-12 h-[1px] bg-[#eadab2]" />
-        </div>
       </div>
     </section>
   );

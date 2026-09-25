@@ -112,7 +112,7 @@ const Hero = () => {
           {/* Main Headline — medium parallax layer */}
           <h1
             ref={headlineRef}
-            className="font-saldo text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl tracking-[0.18em] leading-[1.2] text-[#fcfbf8] uppercase font-normal max-w-xl parallax-medium"
+            className="font-saldo text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl leading-[1.2] text-[#fcfbf8] uppercase font-normal max-w-xl parallax-medium"
           >
             WELCOME TO
             <span className="block mt-2 text-gold-shimmer font-medium">ALPINE</span>
@@ -121,7 +121,7 @@ const Hero = () => {
           {/* Tagline — fastest parallax layer */}
           <p
             ref={taglineRef}
-            className="font-inter text-sm sm:text-base md:text-lg tracking-[0.25em] text-[#e5e0d3] uppercase font-light mt-4 mb-10 max-w-md parallax-fast"
+            className="font-inter text-sm sm:text-base md:text-lg text-[#e5e0d3] uppercase font-light mt-4 mb-10 max-w-md parallax-fast"
           >
             Time, Perfected Forever.
           </p>
