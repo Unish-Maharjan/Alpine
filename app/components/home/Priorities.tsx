@@ -22,7 +22,6 @@ const PRIORITIES = [
 
 export default function Priorities() {
   const sectionRef = useRef<HTMLElement>(null);
-  const watchRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -39,13 +38,13 @@ export default function Priorities() {
         <div ref={contentRef} className="flex flex-col items-center text-center max-w-xl mx-auto lg:mx-0">
           {/* Kicker */}
           <p className="italic font-inter text-xs sm:text-sm text-[#eadab2]/85 mb-4">
-            Our Priorities
+            OUR PRIORITIES
           </p>
 
           {/* Main Headline */}
           <h2 className="font-saldo text-3xl sm:text-4xl lg:text-5xl leading-[1.2] text-white font-normal mb-6">
-            Security, Safety &amp;
-            <span className="block mt-1">Longevity.</span>
+            SECURITY, SAFETY &amp;
+            <span className="block mt-1">LONGEVITY.</span>
           </h2>
 
           {/* Divider Line */}
@@ -77,23 +76,7 @@ export default function Priorities() {
             LEARN MORE
           </Button>
         </div>
-
-        <div className="flex justify-center items-center relative w-full min-h-80 overflow-visible">
-          <div
-            ref={watchRef}
-            className="relative w-full flex items-center justify-center will-change-transform"
-          >
-            <Image
-              src="/images/animatedwatch.webp"
-              alt="Alpine Chronograph Luxury Timepiece"
-              width={700}
-              height={700}
-              className="object-contain w-auto z-100 h-80 sm:h-96 lg:h-[28rem] xl:h-[32rem] max-w-none filter drop-shadow-[0_30px_60px_rgba(0,0,0,0.7)]"
-              priority
-            />
-          </div>
         </div>
-      </div>
     </section>
   );
 }

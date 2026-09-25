@@ -19,6 +19,7 @@ import {
   faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
@@ -158,32 +159,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* OTHER LINKS */}
-          <div className="lg:col-span-2">
-            <h5 className="font-saldo text-xs font-semibold uppercase text-[#eadab2] mb-4">
-              OTHER LINKS
-            </h5>
-            <ul className="space-y-2.5 font-inter text-xs text-[#d8d2c4]">
-              <li>
-                <Link href="#contact" className="hover:text-[#eadab2] transition-colors">
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link href="#products" className="hover:text-[#eadab2] transition-colors">
-                  Products
-                </Link>
-              </li>
-              <li>
-                <Link href="/cart" className="hover:text-[#eadab2] transition-colors">
-                  Cart
-                </Link>
-              </li>
-            </ul>
-          </div>
-
           {/* LEGAL & FOLLOW US */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 -translate-x-10 space-y-6">
             <div>
               <h5 className="font-saldo text-xs font-semibold uppercase text-[#eadab2] mb-4">
                 LEGAL
@@ -223,6 +200,9 @@ const Footer = () => {
                 ))}
               </div>
             </div>
+          </div>
+          <div className="translate-y-40 h-auto w-50">
+            <Image src="/logo/logo.webp" alt="logo" width={300} height={300} />
           </div>
         </div>
 

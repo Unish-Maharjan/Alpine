@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, ShoppingBag, Menu, X, User } from "lucide-react";
+import { Search, ShoppingBag, Menu, X } from "lucide-react";
 
 interface HeaderProps {
   cartCount?: number;
@@ -11,9 +11,28 @@ interface HeaderProps {
 
 export default function Header({ cartCount = 0 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      // Header stays visible if scrolling up OR near the top of the page (< 50px)
+      const isVisible = prevScrollPos > currentScrollPos || currentScrollPos < 50;
+      setVisible(isVisible);
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos]);
 
   return (
-    <header className="bg-[#0c3b3c]/95 backdrop-blur-md border-b border-[#eadab2]/15 sticky top-0 z-50 text-[#f8f6f0] transition-colors duration-300">
+    <header
+      className={`fixed top-0 left-0 right-0 z-60 bg-[#0c3b3c]/95 backdrop-blur-md border-b border-[#eadab2]/15 text-[#f8f6f0] transition-transform duration-300 ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Mobile Menu Toggle */}

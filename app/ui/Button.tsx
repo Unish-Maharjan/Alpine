@@ -30,7 +30,7 @@ const variantStyles = {
   gold: "border-[#eadab2] text-[#eadab2] hover:bg-[#eadab2] hover:text-[#0c3b3c] hover:shadow-[0_0_20px_rgba(234,218,178,0.35)]",
   "solid-gold": "bg-[#eadab2] border-[#eadab2] text-[#0c3b3c] font-semibold hover:bg-[#fbf5e6] hover:shadow-[0_0_25px_rgba(234,218,178,0.45)]",
   light: "border-[#f8f6f0] text-[#f8f6f0] hover:border-[#eadab2] hover:bg-[#eadab2] hover:text-[#0c3b3c]",
-  dark: "border-[#0c3b3c] text-[#0c3b3c] hover:bg-[#0c3b3c] hover:text-[#f8f6f0]",
+  dark: "bg-primary text-[#f5f3ed] hover:bg-[#0c3b3c] hover:text-[#f8f6f0]",
 };
 
 export default function Button({
