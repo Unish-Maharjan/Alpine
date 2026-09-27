@@ -20,30 +20,31 @@ const LogoSection = () => {
     () => {
       if (!containerRef.current || !contentRef.current) return;
 
-      // Master timeline that slides the about section content up from below as user scrolls from Hero
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top bottom",
-          end: "top 20%",
+          start: "top 60%",
+          end: "bottom 75%",
           scrub: 1.2,
         },
       });
 
+      // 1. Logo emblem background fades & scales in first with subtle opacity
       tl.fromTo(
-        contentRef.current,
-        { y: 180, opacity: 0 },
-        { y: 0, opacity: 1, ease: "power2.out", duration: 1 }
+        ".logo-bg-emblem",
+        { scale: 0.88, opacity: 0 },
+        { scale: 1.05, opacity: 0.1, ease: "power2.out", duration: 1 }
       )
+        // 2. Content appears sequentially after the logo
         .fromTo(
-          ".logo-emblem",
-          { scale: 0.82, opacity: 0 },
-          { scale: 1, opacity: 1, ease: "power2.out", duration: 0.6 },
-          "-=0.6"
+          contentRef.current,
+          { y: 60, opacity: 0 },
+          { y: 0, opacity: 1, ease: "power2.out", duration: 0.8 },
+          "+=0.1"
         )
         .fromTo(
           ".word-headline",
-          { opacity: 0, y: 30 },
+          { opacity: 0, y: 25 },
           {
             opacity: 1,
             y: 0,
@@ -67,30 +68,35 @@ const LogoSection = () => {
     <section
       ref={containerRef}
       id="about"
-      className="relative z-10 w-full bg-primary py-24 px-6 sm:px-12 lg:px-16 overflow-hidden shadow-[0_-20px_50px_rgba(0,0,0,0.35)]"
+      className="relative z-10 w-full min-h-[70vh] sm:min-h-[80vh] flex items-center justify-center bg-primary py-24 sm:py-32 px-6 sm:px-12 lg:px-16 overflow-hidden shadow-[0_-20px_50px_rgba(0,0,0,0.35)]"
     >
-      <div
-        ref={contentRef}
-        className="relative max-w-5xl mx-auto flex flex-col items-center text-center z-10 will-change-transform"
-      >
-        {/* Logo Emblem */}
-        <div className="logo-emblem relative w-28 h-28 sm:w-36 sm:h-36 mb-8 filter drop-shadow-md will-change-transform">
+      {/* Background Watermark Logo Emblem */}
+      <div className="absolute inset-1 flex items-center justify-center z-0">
+        <div className="logo-bg-emblem relative w-72 h-72 sm:w-96 sm:h-96
+         md:w-[500px] md:h-[500px] lg:w-[600px] lg:h-[600px] will-change-transform">
           <Image
             src="/logo/logo1.webp"
-            alt="Alpine Emblem"
+            alt="Alpine Emblem Background"
             fill
             className="object-contain"
             priority
-            sizes="(max-width: 640px) 112px, 144px"
+            sizes="(max-width: 640px) 288px, (max-width: 1024px) 500px, 600px"
           />
         </div>
+      </div>
 
+      {/* Centered Content */}
+      <div
+        ref={contentRef}
+        className="relative max-w-4xl mx-auto flex flex-col items-center justify-center text-center z-10 will-change-transform"
+      >
         {/* Main About Headline with Word Stagger */}
-        <h2 className="font-saldo text-3xl sm:text-5xl md:text-6xl text-[#fcfbf8] uppercase font-normal leading-tight max-w-3xl mb-6">
+        <h2 className="font-saldo text-3xl sm:text-5xl md:text-6xl text-secondary
+        uppercase font-normal leading-tight max-w-3xl mb-6">
           {HEADLINE_TEXT.split(" ").map((word, idx) => (
             <span
               key={idx}
-              className="word-headline inline-block mr-3 will-change-transform"
+              className="word-headline inline-block mr-2 sm:mr-3 will-change-transform"
             >
               {word}
             </span>
@@ -99,7 +105,7 @@ const LogoSection = () => {
 
         {/* Story Description with Word Stagger */}
         <p className="desc-text font-inter text-sm sm:text-base md:text-lg
-         text-[#e5e0d3]/85 font-light leading-relaxed max-w-2xl will-change-transform">
+         text-tertiary/90 font-light leading-relaxed max-w-2xl will-change-transform">
           {DESC_TEXT}
         </p>
       </div>

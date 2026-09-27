@@ -3,25 +3,39 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import Button from "@/app/ui/Button";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PRIORITIES = [
-  {
-    line1: "Companion for every new horizon you seek.",
-    line2: "Precision is our eternal pursuit.",
-  },
-  {
-    line1: "Enduring presence across every time zone.",
-    line2: "Peace measured in microns.",
-  },
-];
-
 export default function Priorities() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!contentRef.current) return;
+
+      gsap.fromTo(
+        contentRef.current.children,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        }
+      );
+    },
+    { scope: sectionRef }
+  );
 
   return (
     <section
@@ -29,53 +43,51 @@ export default function Priorities() {
       ref={sectionRef}
       className="w-full bg-primary py-24 lg:py-36 relative overflow-hidden"
     >
-      {/* Ambient radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_65%_40%,rgba(234,218,178,0.06)_0%,transparent_65%)] pointer-events-none" />
-
-      <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-10 grid grid-cols-1 lg:grid-cols-2 items-center gap-14 lg:gap-20">
+      <div className="mx-auto max-w-7xl px-6 sm:px-12 lg:px-16 relative z-10 grid grid-cols-1 lg:grid-cols-2 items-center gap-14 lg:gap-20">
         {/* Left: Content Column */}
-        <div ref={contentRef} className="flex flex-col items-center text-center max-w-xl mx-auto lg:mx-0">
-          {/* Kicker */}
-          <p className="italic font-inter text-xs sm:text-sm text-[#eadab2]/85 mb-4">
+        <div
+          ref={contentRef}
+          className="flex flex-col items-center text-center lg:items-start lg:text-left max-w-xl mx-auto lg:mx-0 will-change-transform"
+        >
+          {/* Eyebrow */}
+          <p className="font-inter text-xs tracking-[0.25em] uppercase text-secondary/90 font-medium mb-3">
             OUR PRIORITIES
           </p>
 
           {/* Main Headline */}
-          <h2 className="font-saldo text-3xl sm:text-4xl lg:text-5xl leading-[1.2] text-white font-normal mb-6">
-            SECURITY, SAFETY &amp;
-            <span className="block mt-1">LONGEVITY.</span>
+          <h2 className="font-saldo text-3xl sm:text-4xl lg:text-5xl leading-[1.15] text-white font-normal uppercase mb-5">
+            QUALITY, TRUST &amp;
+            <span className="block mt-1">TIMELESS VALUE.</span>
           </h2>
 
           {/* Divider Line */}
-          <div className="w-50 h-[1px] bg-[#eadab2]/30 mb-8" />
-          <Image
-            src="/logo/logo1.webp"
-            alt="Alpine Emblem"
-            width={100}
-            height={100}
-            className="object-contain mb-10"
-          />
+          <div className="w-20 h-[1px] bg-secondary/30 mb-6" />
 
-          {/* Spaced Text Paragraphs */}
-          <div className="space-y-6 mb-10 text-center">
-            {PRIORITIES.map((p, i) => (
-              <p
-                key={i}
-                className="font-inter text-[#d8d2c4] text-xs sm:text-sm md:text-base leading-relaxed font-light"
-              >
-                {p.line1}
-                <br />
-                {p.line2}
-              </p>
-            ))}
+          {/* Brand Emblem */}
+          <div className="relative w-12 h-12 sm:w-14 sm:h-14 mb-6 opacity-85">
+            <Image
+              src="/logo/logo1.webp"
+              alt="Alpine Emblem"
+              fill
+              className="object-contain"
+              sizes="56px"
+            />
           </div>
 
-          {/* Button */}
-          <Button href="#contact" variant="gold" size="md">
-            LEARN MORE
+          {/* Streamlined Editorial Copy */}
+          <p className="font-inter text-sm sm:text-base text-tertiary/85 font-light leading-relaxed mb-8 max-w-md">
+            We bring together genuine timepieces from trusted global watchmakers—selected for their enduring design, authentic heritage, and everyday reliability.
+          </p>
+
+          {/* Action Button */}
+          <Button href="/shop" variant="gold" size="md">
+            DISCOVER MORE
           </Button>
         </div>
-        </div>
+
+        {/* Right Column: Reserved for floating WatchAnimation */}
+        <div className="hidden lg:block min-h-[420px]" />
+      </div>
     </section>
   );
 }

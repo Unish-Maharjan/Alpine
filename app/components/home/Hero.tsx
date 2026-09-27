@@ -45,7 +45,7 @@ const Hero = () => {
             className="font-inter text-sm sm:text-base md:text-lg text-primary
              uppercase font-medium mt-7 mb-10 max-w-md"
           >
-            Time, Perfected Forever.
+            A Moment Worth Wearing
           </p>
 
           {/* CTA */}

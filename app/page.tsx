@@ -1,13 +1,13 @@
 import BrandSelection from "./components/home/BrandSelection";
-import Footer from "./components/home/Footer";
-import Header from "./components/home/Header";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 import Hero from "./components/home/Hero";
-import LogoSection from "./components/home/logo";
+import LogoSection from "./components/home/About";
 import PopularWatches from "./components/home/PopularWatches";
-import Preloader from "./components/home/Preloader";
+import Preloader from "./components/Preloader";
 import Priorities from "./components/home/Priorities";
 import Products from "./components/home/Products";
-import SmoothScroll from "./components/home/SmoothScroll";
+import SmoothScroll from "./components/SmoothScroll";
 import WatchAnimation from "./components/home/WatchAnimation";
 
 export default function Home() {
@@ -17,7 +17,6 @@ export default function Home() {
       <SmoothScroll />
       <main className="relative bg-primary">
         <Header />
-        {/* Scoped Hero + About container so Hero is sticky only during About reveal */}
         <div className="relative">
           <Hero />
           <LogoSection />
