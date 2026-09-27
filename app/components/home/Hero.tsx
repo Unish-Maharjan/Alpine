@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import NextImage from "next/image";
 import Button from "@/app/ui/Button";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -12,16 +11,9 @@ gsap.registerPlugin(ScrollTrigger);
 const Hero = () => {
   return (
     <section
-  
-      className="relative w-full bg-[#e7eaea] h-screen
-       min-h-screen flex items-center overflow-hidden"
+      id="hero"
+      className="sticky top-0 w-full h-screen min-h-screen flex items-center bg-tertiary overflow-hidden z-0"
     >
-      {/* Ambient parallax glow orb */}
-      <div
-        className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#eadab2]/5 
-        rounded-full blur-[120px] pointer-events-none parallax-slow"
-      />
-
       <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2 h-full lg:h-[calc(100vh-80px)] relative z-10">
         {/* Content Column (Left Side) */}
         <div className="flex flex-col items-center justify-center text-center px-6 py-16 sm:px-12 lg:px-16 

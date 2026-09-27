@@ -11,26 +11,46 @@ interface HeaderProps {
 
 export default function Header({ cartCount = 0 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      // Header stays visible if scrolling up OR near the top of the page (< 50px)
-      const isVisible = prevScrollPos > currentScrollPos || currentScrollPos < 50;
-      setVisible(isVisible);
-      setPrevScrollPos(currentScrollPos);
+      const currentScrollY = window.scrollY;
+
+      setIsScrolled(currentScrollY > 20);
+
+      // If at the very top, always keep visible
+      if (currentScrollY <= 20) {
+        setVisible(true);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up -> show navbar immediately
+        setVisible(true);
+      } else if (currentScrollY > lastScrollY + 5 && currentScrollY > 80) {
+        // Scrolling down past threshold -> hide navbar (unless mobile menu is open)
+        if (!mobileMenuOpen) {
+          setVisible(false);
+        }
+      }
+
+      lastScrollY = currentScrollY;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [prevScrollPos]);
+  }, [mobileMenuOpen]);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-60 bg-[#0c3b3c]/95 backdrop-blur-md border-b border-[#eadab2]/15 text-[#f8f6f0] transition-transform duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-60 transition-transform duration-300 ${
         visible ? "translate-y-0" : "-translate-y-full"
+      } ${
+        isScrolled
+          ? "bg-primary/95 backdrop-blur-md border-b border-tertiary/10 text-tertiary shadow-md"
+          : "bg-transparent border-b border-transparent text-primary"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,7 +59,11 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
           <div className="flex items-center lg:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-[#f8f6f0] hover:text-[#eadab2] transition-colors"
+              className={`p-2 transition-colors ${
+                isScrolled
+                  ? "text-tertiary hover:text-white"
+                  : "text-primary hover:text-primary/70"
+              }`}
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -54,35 +78,62 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
                 alt="Alpine Logo"
                 width={180}
                 height={42}
-                className="object-contain transition-all duration-300 group-hover:opacity-90 drop-shadow-[0_0_15px_rgba(234,218,178,0.2)]"
+                className={`object-contain transition-all duration-300 group-hover:opacity-90 ${
+                  isScrolled
+                    ? "drop-shadow-[0_0_15px_rgba(231,234,233,0.2)]"
+                    : "invert"
+                }`}
                 priority
               />
             </Link>
           </div>
 
           {/* Navigation Links - Desktop */}
-          <nav className="hidden lg:flex items-center space-x-10">
+          <nav className="hidden lg:flex items-center space-x-15">
             <Link
               href="#products"
-              className="font-saldo text-xs uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#eadab2] hover:after:w-full after:transition-all after:duration-300"
+              className={`font-saldo text-sm uppercase transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] hover:after:w-full after:transition-all after:duration-300 ${
+                isScrolled
+                  ? "text-tertiary/85 hover:text-tertiary after:bg-tertiary"
+                  : "text-primary/85 hover:text-primary after:bg-primary"
+              }`}
             >
               Home
             </Link>
             <Link
               href="#products"
-              className="font-saldo text-xs uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#eadab2] hover:after:w-full after:transition-all after:duration-300"
+              className={`font-saldo text-sm uppercase transition-all 
+                relative py-1 after:content-[''] 
+                after:absolute after:bottom-0 after:left-0 after:w-0
+                 after:h-[1px] hover:after:w-full after:transition-all after:duration-300 ${
+                isScrolled
+                  ? "text-tertiary/85 hover:text-tertiary after:bg-tertiary"
+                  : "text-primary/85 hover:text-primary after:bg-primary"
+              }`}
             >
               Timepieces
             </Link>
             <Link
               href="#priorities"
-              className="font-saldo text-xs uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#eadab2] hover:after:w-full after:transition-all after:duration-300"
+              className={`font-saldo text-sm uppercase transition-all relative py-1 
+                after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0
+                 after:h-px hover:after:w-full after:transition-all after:duration-300 ${
+                isScrolled
+                  ? "text-tertiary/85 hover:text-tertiary after:bg-tertiary"
+                  : "text-primary/85 hover:text-primary after:bg-primary"
+              }`}
             >
               Maison
             </Link>
             <Link
               href="#contact"
-              className="font-saldo text-xs uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] transition-all relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] after:bg-[#eadab2] hover:after:w-full after:transition-all after:duration-300"
+              className={`font-saldo text-sm uppercase transition-all relative 
+                py-1 after:content-[''] after:absolute after:bottom-0 after:left-0
+                 after:w-0 after:h-px hover:after:w-full after:transition-all after:duration-300 ${
+                isScrolled
+                  ? "text-tertiary/85 hover:text-tertiary after:bg-tertiary"
+                  : "text-primary/85 hover:text-primary after:bg-primary"
+              }`}
             >
               Contact Us
             </Link>
@@ -91,19 +142,33 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
           {/* Action Icons */}
           <div className="flex items-center space-x-4 sm:space-x-5">
             <button
-              className="p-2 text-[#f8f6f0]/85 hover:text-[#eadab2] transition-colors rounded-full hover:bg-white/5"
+              className={`p-2 transition-colors rounded-full ${
+                isScrolled
+                  ? "text-tertiary hover:text-white hover:bg-white/5"
+                  : "text-primary hover:text-primary/70 hover:bg-black/5"
+              }`}
               aria-label="Search"
             >
               <Search size={19} />
             </button>
             <Link
               href="/cart"
-              className="p-2 text-[#f8f6f0]/85 hover:text-[#eadab2] transition-colors relative rounded-full hover:bg-white/5"
+              className={`p-2 transition-colors relative rounded-full ${
+                isScrolled
+                  ? "text-tertiary hover:text-white hover:bg-white/5"
+                  : "text-primary hover:text-primary/70 hover:bg-black/5"
+              }`}
               aria-label="Shopping Bag"
             >
               <ShoppingBag size={19} />
               {cartCount > 0 && (
-                <span className="absolute top-0.5 right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#eadab2] text-[10px] text-[#0c3b3c] font-bold shadow-sm">
+                <span
+                  className={`absolute top-0.5 right-0.5 flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-bold shadow-sm ${
+                    isScrolled
+                      ? "bg-tertiary text-primary"
+                      : "bg-primary text-tertiary"
+                  }`}
+                >
                   {cartCount}
                 </span>
               )}
@@ -114,32 +179,54 @@ export default function Header({ cartCount = 0 }: HeaderProps) {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#0c3b3c] border-t border-[#eadab2]/15 px-6 py-6 space-y-4">
+        <div
+          className={`lg:hidden px-6 py-6 space-y-4 border-t transition-colors ${
+            isScrolled
+              ? "bg-primary border-tertiary/15 text-tertiary"
+              : "bg-tertiary border-primary/10 text-primary shadow-lg"
+          }`}
+        >
           <Link
             href="#products"
             onClick={() => setMobileMenuOpen(false)}
-            className="block font-saldo text-sm uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] py-2"
+            className={`block font-saldo text-sm uppercase py-2 ${
+              isScrolled
+                ? "text-tertiary/85 hover:text-tertiary"
+                : "text-primary/85 hover:text-primary"
+            }`}
           >
             Timepieces
           </Link>
           <Link
             href="#products"
             onClick={() => setMobileMenuOpen(false)}
-            className="block font-saldo text-sm uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] py-2"
+            className={`block font-saldo text-sm uppercase py-2 ${
+              isScrolled
+                ? "text-tertiary/85 hover:text-tertiary"
+                : "text-primary/85 hover:text-primary"
+            }`}
           >
             Collections
           </Link>
           <Link
             href="#priorities"
             onClick={() => setMobileMenuOpen(false)}
-            className="block font-saldo text-sm uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] py-2"
+            className={`block font-saldo text-sm uppercase py-2 ${
+              isScrolled
+                ? "text-tertiary/85 hover:text-tertiary"
+                : "text-primary/85 hover:text-primary"
+            }`}
           >
             Craftsmanship &amp; Priorities
           </Link>
           <Link
             href="#contact"
             onClick={() => setMobileMenuOpen(false)}
-            className="block font-saldo text-sm uppercase text-[#f8f6f0]/85 hover:text-[#eadab2] py-2"
+            className={`block font-saldo text-sm uppercase py-2 ${
+              isScrolled
+                ? "text-tertiary/85 hover:text-tertiary"
+                : "text-primary/85 hover:text-primary"
+            }`}
           >
             Contact Us
           </Link>

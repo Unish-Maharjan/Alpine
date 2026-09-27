@@ -22,8 +22,8 @@ useGSAP(() => {
       scrub: 1,
     },
   })
-  .to(watchRef.current, { yPercent: -10, opacity: 1, ease: "power2.out", duration: 1 })
-  .to(watchRef.current, { yPercent: 90, scale: 0.6, xPercent: 15, ease: "power1.inOut", duration: 1.5 });
+  .to(watchRef.current, { yPercent: 0, opacity: 1, ease: "power2.out", duration: 1 })
+  .to(watchRef.current, { yPercent: 105, scale: 0.6, xPercent: 15, ease: "power1.inOut", duration: 1.5 });
 });
     
   return (

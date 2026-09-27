@@ -14,7 +14,7 @@ const POPULAR_WATCHES = [
     name: "Alpine Heritage Automatic",
     category: "Automatic",
     price: "$1,890",
-    image: "/images/watch5.png",
+    image: "/images/watch4.avif",
     description: "Classic dress watch featuring hand-polished steel casing.",
   },
   {
@@ -30,16 +30,14 @@ const POPULAR_WATCHES = [
 export default function PopularWatches() {
   return (
     <section className="w-full bg-[#0c3b3c] text-[#fcfbf8] py-20 px-6 sm:px-12 
-    lg:px-16 border-t border-[#eadab2]/10 relative">
+    lg:px-16 relative z-10">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <span className="font-saldo text-xs text-[#eadab2] uppercase tracking-widest block mb-2">
-            Curated Selection
-          </span>
-          <h2 className="font-saldo text-3xl sm:text-4xl md:text-5xl uppercase font-normal text-[#fcfbf8] mb-4">
+          <h2 className="font-saldo text-3xl sm:text-4xl md:text-5xl
+           uppercase font-medium text-secondary mb-4">
             POPULAR TIMEPIECES
           </h2>
-          <p className="font-inter text-sm sm:text-base text-[#e5e0d3] font-light max-w-xl mx-auto">
+          <p className="font-inter text-sm sm:text-base text-offwhite font-light max-w-xl mx-auto">
             Discover our most sought-after watches crafted with precision and timeless design.
           </p>
         </div>
@@ -49,12 +47,13 @@ export default function PopularWatches() {
           {POPULAR_WATCHES.map((watch) => (
             <div
               key={watch.id}
-              className="bg-primary border border-[#eadab2]/30 p-5 flex flex-col justify-between"
+              className="group bg-primary border border-[#eadab2]/30 p-5 flex flex-col justify-between"
             >
               <div>
-                {/* Cream watch image backdrop container matching screenshot */}
+                {/* Cream watch image backdrop container */}
                 <div className="w-full h-80 relative mb-6 flex items-center justify-center bg-[#f8f6f0] p-6 overflow-hidden">
-                  <div className="w-52 h-52 rounded-full border-2 border-[#b89c57] bg-[#0c3b3c] absolute flex items-center justify-center" />
+                  <div className="w-52 h-52 rounded-full border-2 border-secondary bg-primary absolute flex items-center 
+                  justify-center" />
                   <Image
                     src={watch.image}
                     alt={watch.name}
@@ -78,7 +77,7 @@ export default function PopularWatches() {
                 <span className="font-inter text-sm text-[#eadab2] font-semibold">
                   {watch.price}
                 </span>
-                <span className="font-inter text-[11px] text-[#fcfbf8] uppercase tracking-wider font-light">
+                <span className="font-inter text-[11px] text-secondary uppercase tracking-wider font-light">
                   IN STOCK
                 </span>
               </div>

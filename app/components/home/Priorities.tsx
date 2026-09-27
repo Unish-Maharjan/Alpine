@@ -3,7 +3,6 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import Button from "@/app/ui/Button";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -28,7 +27,7 @@ export default function Priorities() {
     <section
       id="priorities"
       ref={sectionRef}
-      className="w-full bg-[#0c3b3c] text-[#f8f6f0] py-24 lg:py-36 relative overflow-hidden"
+      className="w-full bg-primary py-24 lg:py-36 relative overflow-hidden"
     >
       {/* Ambient radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_65%_40%,rgba(234,218,178,0.06)_0%,transparent_65%)] pointer-events-none" />
@@ -52,8 +51,8 @@ export default function Priorities() {
           <Image
             src="/logo/logo1.webp"
             alt="Alpine Emblem"
-            width={60}
-            height={60}
+            width={100}
+            height={100}
             className="object-contain mb-10"
           />
 

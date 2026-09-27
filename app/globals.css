@@ -17,6 +17,10 @@
   --color-secondary-dark: #c9b687;
   --color-secondary-muted: #baa674;
 
+  --color-tertiary: #e7eae9;
+  --color-tertiary-light: #f2f4f3;
+  --color-tertiary-dark: #d5dad8;
+
   --color-alpine: #0c3b3c;
   --color-alpine-deep: #072526;
   --color-alpine-light: #124d4e;
@@ -37,6 +41,7 @@
 :root {
   --color-primary: #0c3b3c;
   --color-secondary: #eadab2;
+  --color-tertiary: #e7eae9;
   --bg-alpine: #0c3b3c;
   --color-gold: #eadab2;
   --color-offwhite: #f8f6f0;

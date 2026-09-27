@@ -1,5 +1,12 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import Image from "next/image";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const BRAND_LOGOS = [
   { name: "Citizen", tag: "Eco-Drive Precision", logo: "/logo/Rhythm.png" },
@@ -13,38 +20,96 @@ const BRAND_LOGOS = [
 ];
 
 export default function BrandSelection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!sectionRef.current || !gridRef.current) return;
+
+      const cards = gridRef.current.querySelectorAll(".brand-card");
+
+      // Initial states
+      gsap.set(cards, { opacity: 0, y: 60, scale: 0.92 });
+      if (headerRef.current) {
+        gsap.set(headerRef.current, { opacity: 0, y: 30 });
+      }
+
+      // Pinned & scrubbed timeline: cards appear one by one
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "+=150%",
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+        },
+      });
+
+      if (headerRef.current) {
+        tl.to(headerRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        });
+      }
+
+      tl.to(
+        cards,
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.25,
+          ease: "power2.out",
+        },
+        "-=0.2"
+      );
+    },
+    { scope: sectionRef }
+  );
+
   return (
-    <section className="w-full bg-[#e7e9e8] text-[#0c3b3c] py-20 px-6 sm:px-12 lg:px-16 border-t border-[#0c3b3c]/10 relative">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <span className="font-saldo text-xs text-[#0c3b3c]/70 uppercase tracking-widest block mb-2 font-medium">
-            Authorized Retailer
-          </span>
-          <h2 className="font-saldo text-3xl sm:text-4xl md:text-5xl uppercase font-normal text-[#0c3b3c] mb-4">
+    <section
+      ref={sectionRef}
+      className="w-full min-h-screen bg-tertiary text-[#0c3b3c] py-10 px-6 sm:px-12
+       lg:px-16 border-t border-[#0c3b3c]/10 relative flex flex-col justify-center overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto w-full">
+        <div ref={headerRef} className="text-center mb-16 will-change-transform">
+          <h2 className="font-saldo text-3xl sm:text-4xl md:text-5xl uppercase font-medium
+           text-primary mb-4">
             OUR BRANDS
           </h2>
-          <p className="font-inter text-sm sm:text-base text-[#0c3b3c]/80 font-light max-w-xl mx-auto">
+          <p className="font-inter text-xs sm:text-base text-[#0c3b3c]/80 font-light max-w-xl mx-auto">
             Discover iconic timepieces from world-renowned watchmakers selected for distinction and craftsmanship.
           </p>
         </div>
 
         {/* 2 Rows x 4 Columns Card Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div
+          ref={gridRef}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
+        >
           {BRAND_LOGOS.map((brand, idx) => (
             <div
               key={`${brand.name}-${idx}`}
-              className="bg-primary border border-[#eadab2]/30 p-8 flex flex-col justify-between text-center rounded-sm relative overflow-hidden group shadow-lg"
+              className="brand-card bg-primary border border-[#eadab2]/30 p-8 flex flex-col justify-between text-center rounded-sm relative overflow-hidden group shadow-lg will-change-transform"
             >
               {/* Subtle metallic top accent line */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#eadab2]/40 to-transparent" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-[#eadab2]/40 to-transparent" />
 
-              <div className="flex flex-col items-center justify-center w-full min-h-[90px]">
+              <div className="flex flex-col items-center justify-center w-full min-h-22.5">
                 <Image
                   src={brand.logo}
                   alt={`${brand.name} Logo`}
-                  width={260}
-                  height={120}
-                  className="max-h-20 w-auto object-contain brightness-0 invert opacity-100"
+                  width={300}
+                  height={150}
+                  className="max-h-25 w-auto object-contain brightness-0 invert opacity-100"
                 />
               </div>
 
