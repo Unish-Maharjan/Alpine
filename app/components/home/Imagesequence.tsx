@@ -11,9 +11,11 @@ const TOTAL_FRAMES = 120;
 export default function Imagesequence() {
   const rootRef = useRef<HTMLElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const line1Ref = useRef<HTMLSpanElement | null>(null);
-  const line2Ref = useRef<HTMLSpanElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
+  const titleContainerRef = useRef<HTMLDivElement | null>(null);
+  const taglineRef = useRef<HTMLSpanElement | null>(null);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const subRef = useRef<HTMLParagraphElement | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -83,43 +85,46 @@ export default function Imagesequence() {
         scrollTrigger: {
           trigger: root,
           start: "top top",
-          end: "+=250%",
+          end: "+=280%",
           pin: true,
-          scrub: 0.5,
+          scrub: 0.8,
           anticipatePin: 1,
         },
       });
 
-      // 1. Scrub canvas frame sequence
+      // 1. Scrub canvas frame sequence (0% to ~75% of scroll)
       tl.to(
         frameObj,
         {
           frame: TOTAL_FRAMES,
           snap: "frame",
-          ease: "none",
+          ease: "power1.inOut",
           onUpdate: renderFrame,
         },
         0
       );
 
-      // Darken overlay as user scrolls
-      if (overlayRef.current) {
-        tl.to(
-          overlayRef.current,
-          { opacity: 0.8, ease: "power1.inOut" },
-          0
-        );
-      }
-
-      // 2. Reveal text lines smoothly near end of frame sequence
+      // 3. Reveal "BUILT TO GO DEEP" after image sequence is completed
       if (!reduceMotion) {
-        const lines = [line1Ref.current, line2Ref.current].filter(Boolean);
-        if (lines.length > 0) {
+        const textElements = [taglineRef.current, titleRef.current, subRef.current].filter(Boolean);
+        if (textElements.length > 0) {
           tl.fromTo(
-            lines,
-            { y: 60, opacity: 0 },
-            { y: 0, opacity: 1, stagger: 0.2, ease: "power3.out", duration: 0.6 }
+            textElements,
+            { opacity: 0, y: 45, scale: 0.94 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              stagger: 0.08,
+              ease: "power3.out",
+              duration: 0.28,
+            },
+            0.72
           );
+        }
+      } else {
+        if (titleContainerRef.current) {
+          tl.to(titleContainerRef.current, { opacity: 1, duration: 0.2 }, 0.75);
         }
       }
     }, root);
@@ -134,13 +139,39 @@ export default function Imagesequence() {
     <section
       ref={rootRef}
       id="beyond"
-      className="relative h-screen overflow-hidden flex items-end bg-neutral-950"
+      className="relative h-screen overflow-hidden flex items-center justify-center bg-[#06334a]"
     >
       {/* HTML5 Canvas Frame Sequence Background */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full object-cover"
       />
+
+      {/* Oceanic bottom gradient for smooth transition to the section below */}
+      <div className="absolute bottom-0 inset-x-0 h-44 sm:h-64 bg-gradient-to-t from-[#06334a] via-[#06334a]/60 to-transparent z-10 pointer-events-none" />
+
+      {/* Subtle central vignette to enhance contrast and depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(6,51,74,0.65)_100%)] z-10 pointer-events-none" />
+
+      {/* "BUILT TO GO DEEP" Title Reveal */}
+      <div
+        ref={titleContainerRef}
+        className="relative z-20 flex flex-col items-center justify-center text-center px-6 pointer-events-none max-w-5xl mx-auto select-none"
+      >
+        <h2
+          ref={titleRef}
+          className="font-saldo text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-wider text-secondary uppercase font-normal opacity-0 drop-shadow-[0_0_40px_rgba(234,218,178,0.45)] drop-shadow-[0_15px_30px_rgba(0,0,0,0.95)]"
+        >
+          BUILT TO GO DEEP
+        </h2>
+
+        <p
+          ref={subRef}
+          className="font-inter text-xs sm:text-sm md:text-base tracking-[0.25em] uppercase text-secondary-light/95 mt-4 opacity-0 font-medium drop-shadow-[0_4px_18px_rgba(0,0,0,0.95)]"
+        >
+          Engineered to Conquer the Abyss
+        </p>
+      </div>
     </section>
   );
 }

@@ -44,14 +44,9 @@ export default function NotFound() {
         </span>
 
         {/* Main Headline */}
-        <h1 className="font-saldo text-3xl sm:text-4xl md:text-5xl uppercase font-normal text-white tracking-tight leading-[1.15] mb-5">
-          A MOMENT LOST TO TIME
+        <h1 className="font-saldo text-xl sm:text-xl md:text-4xl uppercase font-normal text-secondary w-200 whitespace-nowrap mb-16">
+          A preview of what’s possible.<br/> The full experience awaits your approval.
         </h1>
-
-        {/* Description */}
-        <p className="font-inter text-sm sm:text-base text-tertiary/75 font-light leading-relaxed max-w-md mb-10">
-          The page or timepiece you are seeking cannot be located within our current collection. It may have moved or no longer exists.
-        </p>
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full sm:w-auto">

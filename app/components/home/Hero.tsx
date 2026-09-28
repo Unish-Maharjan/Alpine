@@ -12,63 +12,53 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="sticky top-0 w-full h-screen min-h-screen flex items-center bg-tertiary overflow-hidden z-0"
+      className="relative w-full min-h-screen lg:h-screen flex items-center bg-white text-primary overflow-hidden"
     >
-      <div className="w-full min-h-screen grid grid-cols-1 lg:grid-cols-2 h-full lg:h-[calc(100vh-80px)] relative z-10">
+      <div className="w-full h-full min-h-screen flex flex-col lg:flex-row relative z-10">
         {/* Content Column (Left Side) */}
-        <div className="flex flex-col items-center justify-center text-center px-6 py-16 sm:px-12 lg:px-16 
-        xl:px-24 z-10 h-full">
-
-          {/* Logo Emblem — slowest parallax layer */}
-          <div className=" relative mb-6">
+        <div className="w-full lg:w-1/2 flex flex-col items-center justify-center text-center px-6 sm:px-12 lg:px-16 xl:px-20 py-24 sm:py-28 lg:py-16 h-full z-10 bg-white">
+          {/* Logo Emblem */}
+          <div className="relative mb-6">
             <NextImage
-              src="/logo/logo1.webp"
+              src="/logo/primarylogo.png"
               alt="Alpine Emblem"
               width={110}
               height={110}
-              className="object-contain filter relative z-10 invert"
+              className="object-contain relative z-10"
               priority
             />
           </div>
 
-          {/* Main Headline — medium parallax layer */}
-          <h1
-            className="font-saldo mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 
-             text-primary uppercase font-normal max-w-xl"
-          >
+          {/* Main Headline */}
+          <h1 className="font-saldo text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-primary uppercase font-normal max-w-xl leading-tight">
             WELCOME
             <span className="block mt-2 font-medium">TO ALPINE</span>
           </h1>
 
-          {/* Tagline — fastest parallax layer */}
-          <p
-            className="font-inter text-sm sm:text-base md:text-lg text-primary
-             uppercase font-medium mt-7 mb-10 max-w-md"
-          >
+          {/* Tagline */}
+          <p className="font-inter text-sm sm:text-base md:text-lg text-primary/85 uppercase font-medium mt-6 mb-9 max-w-md tracking-wider">
             A Moment Worth Wearing
           </p>
 
           {/* CTA */}
-          <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div className="flex items-center gap-4">
             <Button href="#products" variant="dark" size="md">
               Discover Alpine
             </Button>
           </div>
         </div>
 
-        {/* Video Column (Right Side) — parallax at 60% scroll rate */}
-        <div
-          className="relative w-full h-[450px] sm:h-[550px] lg:h-full min-h-[450px] bg-[#072526] 
-          overflow-hidden flex items-center justify-center"
-        >
+        {/* Video Column (Right Side) */}
+        <div className="relative w-full lg:w-1/2 h-[50vh] sm:h-[60vh] lg:h-full min-h-[420px] lg:min-h-full bg-white overflow-hidden flex items-center justify-center">
           <video
-            src="/media/hero.mp4"
+            className="absolute inset-0 w-full h-full object-cover object-center scale-[2.1] origin-center"
             autoPlay
             loop
             muted
             playsInline
-            className="w-full h-[120%] object-cover opacity-90 parallax-medium"
-          />
+          >
+            <source src="/media/hero.mp4" type="video/mp4" />
+          </video>
         </div>
       </div>
     </section>

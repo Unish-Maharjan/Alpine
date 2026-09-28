@@ -22,7 +22,12 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Footer = () => {
+interface FooterProps {
+  variant?: "default" | "dark" | "blue";
+}
+
+const Footer = ({ variant = "default" }: FooterProps) => {
+  const isDarkTheme = variant === "dark" || variant === "blue";
   const footerRef = useRef<HTMLElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
@@ -77,12 +82,16 @@ const Footer = () => {
     <footer
       id="contact"
       ref={footerRef}
-      className="bg-primary text-[#f8f6f0] border-t border-[#eadab2]/15 pt-16 pb-12 font-sans relative overflow-hidden"
+      className={`${
+        isDarkTheme ? "bg-[#06334a] border-t border-[#eadab2]/15" : "bg-primary border-t border-[#eadab2]/15"
+      } text-[#f8f6f0] pt-16 pb-12 font-sans relative overflow-hidden`}
     >
       {/* Parallax ambient glow */}
       <div
         ref={glowRef}
-        className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#eadab2]/8 rounded-full blur-3xl pointer-events-none parallax-slow"
+        className={`absolute -bottom-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] ${
+          isDarkTheme ? "bg-[#eadab2]/6" : "bg-[#eadab2]/8"
+        } rounded-full blur-3xl pointer-events-none parallax-slow`}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -193,7 +202,9 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="w-8 h-8 rounded-full border border-[#eadab2]/30 flex items-center justify-center text-[#f8f6f0] hover:text-[#0c3b3c] hover:bg-[#eadab2] hover:border-[#eadab2] transition-all duration-300"
+                    className={`w-8 h-8 rounded-full border border-[#eadab2]/30 flex items-center justify-center text-[#f8f6f0] ${
+                      isDarkTheme ? "hover:text-neutral-950" : "hover:text-[#0c3b3c]"
+                    } hover:bg-[#eadab2] hover:border-[#eadab2] transition-all duration-300`}
                   >
                     <FontAwesomeIcon icon={social.icon} className="w-3.5 h-3.5" />
                   </a>
