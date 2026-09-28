@@ -70,7 +70,7 @@ export default function BrandSelection() {
         {BRANDS.map((brand, idx) => (
           <Link
             key={brand.id}
-            href="/"
+            href="/not-found"
             className={`editorial-brand-card group relative w-full h-[80vh] bg-primary border-b
                border-secondary/20 md:border-r transition-all duration-500 will-change-transform 
                flex flex-col items-center justify-center text-center overflow-hidden

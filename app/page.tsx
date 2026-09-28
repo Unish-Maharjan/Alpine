@@ -8,7 +8,6 @@ import Preloader from "./components/Preloader";
 import Priorities from "./components/home/Priorities";
 import Products from "./components/home/Products";
 import SmoothScroll from "./components/SmoothScroll";
-import WatchAnimation from "./components/home/WatchAnimation";
 
 export default function Home() {
   return (
@@ -23,6 +22,7 @@ export default function Home() {
         <BrandSelection/>
         <PopularWatches/>
         <Products/>  
+        <Priorities/>
         <Footer/>
       </main>
     </>

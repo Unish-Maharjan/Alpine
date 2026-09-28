@@ -42,7 +42,7 @@ const Hero = () => {
 
           {/* CTA */}
           <div className="flex items-center gap-4">
-            <Button href="#products" variant="dark" size="md">
+            <Button href="/not-found" variant="dark" size="md">
               Discover Alpine
             </Button>
           </div>

@@ -14,8 +14,8 @@ interface HeaderProps {
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Timepieces", href: "/timepieces" },
-  { label: "Maison", href: "#about" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "Maison", href: "/not-found" },
+  { label: "Contact Us", href: "/not-found" },
 ];
 
 export default function Header({
@@ -94,7 +94,7 @@ export default function Header({
         visible ? "translate-y-0" : "-translate-y-full"
       } ${headerBgClass}`}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full px-6 sm:px-10 lg:px-14 xl:px-16">
         <div className="flex items-center justify-between h-18 sm:h-20 relative">
           {/* LEFT: Alpine Timepieces Logo */}
           <div className="shrink-0 flex items-center z-20">
@@ -140,7 +140,7 @@ export default function Header({
 
             {/* Shopping Bag / Cart Icon */}
             <Link
-              href="/cart"
+              href="/not-found"
               className={`p-2 transition-all duration-250 relative rounded-full hover:scale-105 ${iconBtnClass}`}
               aria-label="Shopping Bag"
             >
@@ -160,7 +160,7 @@ export default function Header({
 
             {/* Log In Button */}
             <Button
-              href="/login"
+              href="/not-found"
               variant={isScrolled || isDarkTheme ? "solid-gold" : "dark"}
               size="sm"
               className="hidden sm:inline-flex text-[11px] px-5 py-2 border-none"
@@ -200,7 +200,7 @@ export default function Header({
               </Link>
             ))}
             <Link
-              href="/login"
+              href="/not-found"
               onClick={() => setMobileMenuOpen(false)}
               className="font-saldo text-lg sm:text-xl uppercase tracking-widest text-secondary hover:text-secondary-light transition-colors duration-200 py-1 border-b border-secondary/10 flex items-center justify-between"
             >

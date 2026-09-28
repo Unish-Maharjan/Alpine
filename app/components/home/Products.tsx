@@ -56,9 +56,9 @@ const Products = () => {
   );
 
   return (
-    <div ref={containerRef} className="relative z-10 w-full bg-primary pt-16 lg:pt-24 overflow-hidden">
+    <div ref={containerRef} className="relative z-10 w-full bg-primary pt-10 lg:pt-24 overflow-hidden">
       {/* Section Header */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
+      <div className="max-w-7xl mx-auto px-6 sm:px-12 -mt-6 lg:px-16">
         <div ref={headerRef} className="text-center mb-9 sm:mb-9 will-change-transform">
           <h2 className="font-saldo text-3xl sm:text-4xl md:text-5xl uppercase font-normal
            text-secondary mb-4">
@@ -121,7 +121,7 @@ const Products = () => {
             </div>
           </div>
 
-          <Button href="/timepieces" variant="gold" size="md" className="w-fit">
+          <Button href="/not-found" variant="gold" size="md" className="w-fit">
             Learn more
           </Button>
         </div>

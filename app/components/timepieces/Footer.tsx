@@ -1,17 +1,12 @@
 "use client";
 
 import React, { useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMapMarkerAlt,
-  faPhone,
-  faEnvelope,
-} from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebookF,
   faInstagram,
@@ -19,218 +14,254 @@ import {
   faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 interface FooterProps {
   variant?: "default" | "dark" | "blue";
 }
 
-const Footer = ({ variant = "default" }: FooterProps) => {
-  const isDarkTheme = variant === "dark" || variant === "blue";
+const Footer = ({ variant = "dark" }: FooterProps) => {
   const footerRef = useRef<HTMLElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
-  const navRef = useRef<HTMLDivElement>(null);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const brandTitleRef = useRef<HTMLHeadingElement>(null);
+  const columnsRef = useRef<HTMLDivElement>(null);
+  const dividerRef = useRef<HTMLDivElement>(null);
+  const infoRowRef = useRef<HTMLDivElement>(null);
+  const watchContainerRef = useRef<HTMLDivElement>(null);
+  const watchImageRef = useRef<HTMLImageElement>(null);
 
   useGSAP(
     () => {
       if (!footerRef.current) return;
 
-      // Ambient glow orb floats upward as footer enters view
-      gsap.to(glowRef.current, {
-        y: -100,
-        ease: "none",
+      // 1. Entrance animation for header elements (Title, Columns, Divider, Info)
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: footerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 2,
-        },
-      });
-
-      // Nav grid — staggered reveal from below
-      gsap.from(navRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 1.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 85%",
+          start: "top 80%",
+          end: "top 30%",
           toggleActions: "play none none reverse",
         },
       });
 
-      // Bottom bar fades up after nav
-      gsap.from(bottomRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 0.9,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 70%",
-          toggleActions: "play none none reverse",
-        },
-      });
+      tl.fromTo(
+        brandTitleRef.current,
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.1, ease: "power3.out" }
+      )
+        .fromTo(
+          columnsRef.current ? columnsRef.current.children : [],
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power2.out" },
+          "-=0.7"
+        )
+        .fromTo(
+          [dividerRef.current, infoRowRef.current],
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power2.out" },
+          "-=0.5"
+        );
+
+      // 2. Continuous Parallax Scrub for Watch rising from water
+      if (watchContainerRef.current && watchImageRef.current) {
+        gsap.fromTo(
+          watchImageRef.current,
+          { yPercent: 10, scale: 1.03 },
+          {
+            yPercent: -3,
+            scale: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: footerRef.current,
+              start: "top bottom",
+              end: "bottom bottom",
+              scrub: 1.2,
+            },
+          }
+        );
+      }
     },
     { scope: footerRef }
   );
 
   return (
     <footer
-      id="contact"
       ref={footerRef}
-      className={`${
-        isDarkTheme ? "bg-[#06334a] border-t border-[#eadab2]/15" : "bg-primary border-t border-[#eadab2]/15"
-      } text-[#f8f6f0] pt-16 pb-12 font-sans relative overflow-hidden`}
+      id="contact"
+      className="relative w-full h-screen min-h-screen max-h-screen bg-[#06334a] text-[#f8f6f0] flex flex-col justify-between overflow-hidden select-none border-0 outline-none"
     >
-      {/* Parallax ambient glow */}
-      <div
-        ref={glowRef}
-        className={`absolute -bottom-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] ${
-          isDarkTheme ? "bg-[#eadab2]/6" : "bg-[#eadab2]/8"
-        } rounded-full blur-3xl pointer-events-none parallax-slow`}
-      />
+      {/* Background: image.png */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/images/image.png"
+          alt="Alpine Timepieces Background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-top opacity-75 brightness-90"
+        />
+        {/* Soft oceanic overlay for text readability */}
+        <div className="absolute inset-0 bg-[#06334a]/45" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Main Footer Content */}
-        <div
-          ref={navRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 py-10 border-b border-[#eadab2]/15 text-sm"
+      {/* Upper Section: Brand Title, 4-Column Content, Divider & Info */}
+      <div className="relative z-20 w-full pt-4 sm:pt-6 md:pt-8 px-6 sm:px-10 lg:px-16 max-w-[1600px] mx-auto flex flex-col shrink-0">
+        {/* 1. TOP BRAND AREA: Clean uppercase brand typography */}
+        <h2
+          ref={brandTitleRef}
+          className="font-saldo text-[5.5vw] sm:text-[6vw] md:text-[6.5vw] lg:text-[7vw] uppercase tracking-wide text-[#eadab2] text-center w-full whitespace-nowrap font-normal will-change-transform drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] mb-3 sm:mb-7"
         >
-          {/* Brand & Store Info Column */}
-          <div className="sm:col-span-2 lg:col-span-5 space-y-6">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/logo/logo1.webp"
-                alt="Alpine Timepieces Logo"
-                width={180}
-                height={45}
-                className="h-8 sm:h-9 w-auto object-contain brightness-0 invert"
-              />
-            </div>
+          ALPINE TIMEPIECES
+        </h2>
 
-            <p className="font-inter text-[#d8d2c4] text-xs leading-relaxed max-w-md">
-              Nepal&apos;s leading authorized retailer for Casio, G-SHOCK, Citizen, and Rhythm.
-              <br />
-              Genuine products backed by official warranty.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-inter text-xs text-[#d8d2c4] pt-2">
-              <div className="space-y-3">
-                <div className="flex items-start gap-2.5">
-                  <FontAwesomeIcon icon={faMapMarkerAlt} className="w-3.5 h-3.5 text-[#eadab2] mt-0.5 shrink-0" />
-                  <span>Durbarmarg, Kathmandu</span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <FontAwesomeIcon icon={faPhone} className="w-3.5 h-3.5 text-[#eadab2] shrink-0" />
-                  <a href="tel:9801022393" className="hover:text-[#eadab2] transition-colors">980-1022393</a>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <FontAwesomeIcon icon={faEnvelope} className="w-3.5 h-3.5 text-[#eadab2] shrink-0" />
-                  <a href="mailto:support@alpinetimepieces.com" className="hover:text-[#eadab2] transition-colors">
-                    support@alpinetimepieces.com
-                  </a>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-start gap-2.5">
-                  <FontAwesomeIcon icon={faMapMarkerAlt} className="w-3.5 h-3.5 text-[#eadab2] mt-0.5 shrink-0" />
-                  <span>Shop no 102, First floor, CIVIL MALL</span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <FontAwesomeIcon icon={faPhone} className="w-3.5 h-3.5 text-[#eadab2] shrink-0" />
-                  <a href="tel:9700056616" className="hover:text-[#eadab2] transition-colors">970-0056616</a>
-                </div>
-              </div>
-            </div>
+        {/* 2. FOUR COLUMNS CONTENT (Information, Our Brands, Legal, Follow Us) */}
+        <div
+          ref={columnsRef}
+          className="grid grid-cols-2 md:grid-cols-4 gap-x-6 lg:gap-x-12 gap-y-3 pb-2 max-w-6xl mx-auto w-full text-xs sm:text-[13px]"
+        >
+          {/* Column 1: INFORMATION */}
+          <div>
+            <h5 className="font-saldo text-[11px] sm:text-xs font-semibold uppercase text-[#eadab2] tracking-wider mb-2 drop-shadow-sm">
+              INFORMATION
+            </h5>
+            <ul className="space-y-1 sm:space-y-1.5 font-inter text-[11px] sm:text-xs text-[#d8d2c4]">
+              {[
+                { label: "About Us", href: "/not-found" },
+                { label: "Our Story", href: "/not-found" },
+                { label: "Store Locations", href: "/not-found" },
+                { label: "Contact Us", href: "/not-found" },
+                { label: "Authenticity & Care", href: "/not-found" },
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="hover:text-[#eadab2] hover:translate-x-0.5 transition-all inline-block"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* OUR BRANDS */}
-          <div className="lg:col-span-3">
-            <h5 className="font-saldo text-xs font-semibold uppercase text-[#eadab2] mb-4">
+          {/* Column 2: OUR BRANDS */}
+          <div>
+            <h5 className="font-saldo text-[11px] sm:text-xs font-semibold uppercase text-[#eadab2] tracking-wider mb-2 drop-shadow-sm">
               OUR BRANDS
             </h5>
-            <ul className="space-y-2.5 font-inter text-xs text-[#d8d2c4]">
+            <ul className="space-y-1 sm:space-y-1.5 font-inter text-[11px] sm:text-xs text-[#d8d2c4]">
               {["Casio", "Citizen", "Daniel Klein", "Q&Q", "Rhythm"].map((brand) => (
                 <li key={brand}>
-                  <Link href="#products" className="hover:text-[#eadab2] transition-colors">
+                  <Link
+                    href="/not-found"
+                    className="hover:text-[#eadab2] hover:translate-x-0.5 transition-all inline-block"
+                  >
                     {brand}
                   </Link>
                 </li>
               ))}
-              <li className="pt-1 text-[#eadab2] font-medium italic">
-                Something Iconic Is Coming !!
-              </li>
             </ul>
           </div>
 
-          {/* LEGAL & FOLLOW US */}
-          <div className="lg:col-span-2 space-y-6">
-            <div>
-              <h5 className="font-saldo text-xs font-semibold uppercase text-[#eadab2] mb-4">
-                LEGAL
-              </h5>
-              <ul className="space-y-2.5 font-inter text-xs text-[#d8d2c4]">
-                {["Privacy Policy", "Terms & Conditions", "Return & Refund", "Warranty Policy"].map((legal) => (
-                  <li key={legal}>
-                    <Link href="#" className="hover:text-[#eadab2] transition-colors">
-                      {legal}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h5 className="font-saldo text-xs font-semibold uppercase text-[#eadab2] mb-3">
-                FOLLOW US
-              </h5>
-              <div className="flex items-center gap-2.5 flex-wrap">
-                {[
-                  { icon: faFacebookF, label: "Facebook", href: "https://facebook.com" },
-                  { icon: faInstagram, label: "Instagram", href: "https://instagram.com" },
-                  { icon: faTiktok, label: "TikTok", href: "https://tiktok.com" },
-                  { icon: faWhatsapp, label: "WhatsApp", href: "https://wa.me/9801022393" },
-                ].map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className={`w-8 h-8 rounded-full border border-[#eadab2]/30 flex items-center justify-center text-[#f8f6f0] ${
-                      isDarkTheme ? "hover:text-neutral-950" : "hover:text-[#0c3b3c]"
-                    } hover:bg-[#eadab2] hover:border-[#eadab2] transition-all duration-300`}
+          {/* Column 3: LEGAL */}
+          <div>
+            <h5 className="font-saldo text-[11px] sm:text-xs font-semibold uppercase text-[#eadab2] tracking-wider mb-2 drop-shadow-sm">
+              LEGAL
+            </h5>
+            <ul className="space-y-1 sm:space-y-1.5 font-inter text-[11px] sm:text-xs text-[#d8d2c4]">
+              {[
+                "Privacy Policy",
+                "Terms & Conditions",
+                "Return & Refund",
+                "Warranty Policy",
+              ].map((legal) => (
+                <li key={legal}>
+                  <Link
+                    href="/not-found"
+                    className="hover:text-[#eadab2] hover:translate-x-0.5 transition-all inline-block"
                   >
-                    <FontAwesomeIcon icon={social.icon} className="w-3.5 h-3.5" />
-                  </a>
-                ))}
-              </div>
-            </div>
+                    {legal}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="lg:col-span-2 translate-y-20 flex items-center justify-start lg:justify-end opacity-80 
-          pt-4 lg:pt-0">
-            <Image src="/logo/logo.webp" alt="Alpine Timepieces" width={160} height={40} 
-            className="w-36 h-auto object-contain" />
+
+          {/* Column 4: FOLLOW US */}
+          <div>
+            <h5 className="font-saldo text-[11px] sm:text-xs font-semibold uppercase text-[#eadab2] tracking-wider mb-2 drop-shadow-sm">
+              FOLLOW US
+            </h5>
+            <div className="flex items-center gap-2 flex-wrap pt-0.5">
+              {[
+                { icon: faFacebookF, label: "Facebook", href: "https://facebook.com" },
+                { icon: faInstagram, label: "Instagram", href: "https://instagram.com" },
+                { icon: faTiktok, label: "TikTok", href: "https://tiktok.com" },
+                { icon: faWhatsapp, label: "WhatsApp", href: "https://wa.me/9801022393" },
+              ].map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="w-7 h-7 rounded-full border border-[#eadab2]/30 flex items-center justify-center text-[#f8f6f0] hover:bg-[#eadab2] hover:text-[#06334a] hover:border-[#eadab2] transition-all duration-300"
+                >
+                  <FontAwesomeIcon icon={social.icon} className="w-3 h-3" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Bottom Section: Copyright & Designed By */}
+        {/* 3. DIVIDER: Very subtle horizontal hairline divider */}
         <div
-          ref={bottomRef}
-          className="pt-6 flex flex-col md:flex-row items-center justify-between text-xs text-[#d8d2c4]/70 font-light gap-4 font-inter"
+          ref={dividerRef}
+          className="w-full border-t border-[#eadab2]/15 my-2.5 sm:my-3 max-w-6xl mx-auto"
+        />
+
+        {/* 4. COPYRIGHT / SMALL INFORMATION ROW */}
+        <div
+          ref={infoRowRef}
+          className="w-full max-w-6xl mx-auto flex flex-col sm:flex-row items-center
+           justify-between gap-2 mb-6 text-[11px] sm:text-xs text-[#d8d2c4]/80 font-inter font-light"
         >
           <p>&copy; {new Date().getFullYear()} Alpine Timepieces. All rights reserved.</p>
           <div className="flex items-center gap-2">
-            <span className="text-[#d8d2c4] text-xs font-inter">Designed By</span>
-            <Link href="https://www.webxnepal.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
-              <Image src="/logo/webx-logo.svg" alt="WebX Nepal" width={60} height={20} className="h-5 w-auto" />
+            <span className="text-[#d8d2c4]/80 text-[11px] sm:text-xs font-inter">Designed And Developed By</span>
+            <Link
+              href="https://www.webxnepal.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center opacity-85 hover:opacity-100 transition-opacity"
+            >
+              <Image
+                src="/logo/webx-logo.svg"
+                alt="WebX Nepal"
+                width={60}
+                height={20}
+                className="h-4 sm:h-5 w-auto"
+              />
             </Link>
           </div>
+        </div>
+      </div>
+
+      {/* 5. LARGE VISUAL: Lower half with /frames/14.jpg exactly like Home page */}
+      <div
+        ref={watchContainerRef}
+        className="relative z-10 w-full flex-1 min-h-[30vh] flex items-end justify-center overflow-hidden"
+      >
+        {/* Watch Image emerging from water */}
+        <div className="relative w-full h-full flex -mb-5 items-end justify-center">
+          <Image
+            ref={watchImageRef}
+            src="/frames/14.jpg"
+            alt="Alpine luxury stainless steel watch emerging from deep ocean water"
+            fill
+            priority
+            className="object-cover object-center lg:object-[center_70%] scale-100 will-change-transform"
+            sizes="100vw"
+          />
         </div>
       </div>
     </footer>

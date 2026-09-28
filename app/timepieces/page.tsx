@@ -5,9 +5,6 @@ import Hero from "../components/timepieces/Hero";
 import TimepiecesAbout from "../components/timepieces/About";
 import SmoothScroll from "../components/SmoothScroll";
 import Titlesection from "../components/timepieces/Titlesection";
-import Priorities from "../components/home/Priorities";
-import WatchAnimation from "../components/timepieces/WatchAnimation";
-
 
 export const metadata: Metadata = {
   title: "Timepieces | Alpine Timepieces",
@@ -22,7 +19,6 @@ export default function TimepiecesPage() {
         <Header variant="dark" />
         <Hero />
         <TimepiecesAbout />
-        <WatchAnimation/>
         <Titlesection />
         <Footer variant="dark" />
       </main>

@@ -83,14 +83,17 @@ const Footer = () => {
     <footer
       ref={footerRef}
       id="contact"
-      className="relative w-full h-screen min-h-screen max-h-screen bg-[#fcfbf8] text-primary flex flex-col justify-between overflow-hidden select-none"
+      className="relative w-full h-screen min-h-screen max-h-screen bg-[#e2e6e7] text-primary flex flex-col justify-between overflow-hidden select-none -mt-1 sm:-mt-2 border-0 outline-none"
     >
       {/* Upper Section: Brand Title, 4-Column Content, Divider & Info */}
-      <div className="relative z-20 w-full pt-4 sm:pt-6 md:pt-8 px-6 sm:px-10 lg:px-16 max-w-[1600px] mx-auto flex flex-col shrink-0">
-        {/* 1. TOP BRAND AREA: Massive clean uppercase brand typography spanning most of the width */}
+      <div className="relative z-20 w-full pt-4 sm:pt-6 md:pt-8 px-6 sm:px-10 lg:px-16 max-w-[1600px]
+       mx-auto flex flex-col shrink-0">
+        {/* 1. TOP BRAND AREA: Clean uppercase brand typography */}
         <h2
           ref={brandTitleRef}
-          className="font-saldo text-[8.5vw] sm:text-[9vw] md:text-[9.5vw] lg:text-[10vw] uppercase tracking-tight text-primary leading-none text-center w-full whitespace-nowrap font-normal will-change-transform drop-shadow-sm mb-3 sm:mb-5"
+          className="font-saldo text-[5.5vw] sm:text-[6vw] md:text-[6.5vw]
+           lg:text-[7vw] uppercase tracking-wide text-primary text-center w-full
+            whitespace-nowrap font-normal will-change-transform drop-shadow-sm mb-3 sm:mb-7"
         >
           ALPINE TIMEPIECES
         </h2>
@@ -107,11 +110,11 @@ const Footer = () => {
             </h5>
             <ul className="space-y-1 sm:space-y-1.5 font-inter text-[11px] sm:text-xs text-primary/75">
               {[
-                { label: "About Us", href: "/#about" },
-                { label: "Our Story", href: "/#about" },
-                { label: "Store Locations", href: "/#contact" },
-                { label: "Contact Us", href: "/#contact" },
-                { label: "Authenticity & Care", href: "/timepieces" },
+                { label: "About Us", href: "/not-found" },
+                { label: "Our Story", href: "/not-found" },
+                { label: "Store Locations", href: "/not-found" },
+                { label: "Contact Us", href: "/not-found" },
+                { label: "Authenticity & Care", href: "/not-found" },
               ].map((item) => (
                 <li key={item.label}>
                   <Link
@@ -134,7 +137,7 @@ const Footer = () => {
               {["Casio", "Citizen", "Daniel Klein", "Q&Q", "Rhythm"].map((brand) => (
                 <li key={brand}>
                   <Link
-                    href="/timepieces"
+                    href="/not-found"
                     className="hover:text-primary hover:translate-x-0.5 transition-all inline-block"
                   >
                     {brand}
@@ -158,7 +161,7 @@ const Footer = () => {
               ].map((legal) => (
                 <li key={legal}>
                   <Link
-                    href="#"
+                    href="/not-found"
                     className="hover:text-primary hover:translate-x-0.5 transition-all inline-block"
                   >
                     {legal}
@@ -204,7 +207,8 @@ const Footer = () => {
         {/* 4. COPYRIGHT / SMALL INFORMATION ROW */}
         <div
           ref={infoRowRef}
-          className="w-full max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] sm:text-xs text-primary/70 font-inter font-light"
+          className="w-full max-w-6xl mx-auto flex flex-col sm:flex-row items-center
+           justify-between gap-2 text-[11px] sm:text-xs text-primary/70 font-inter font-light"
         >
           <p>&copy; {new Date().getFullYear()} Alpine Timepieces. All rights reserved.</p>
           <div className="flex items-center gap-2">
@@ -231,12 +235,9 @@ const Footer = () => {
       <div
         ref={watchContainerRef}
         className="relative z-10 w-full flex-1 min-h-[30vh] flex items-end justify-center overflow-hidden"
-      >
-        {/* Soft top gradient to create seamless transition into off-white background */}
-        <div className="absolute top-0 inset-x-0 h-24 sm:h-32 bg-gradient-to-b from-[#fcfbf8] via-[#fcfbf8]/85 to-transparent z-10 pointer-events-none" />
-
+      >        
         {/* Watch Image emerging from water */}
-        <div className="relative w-full h-full flex items-end justify-center">
+        <div className="relative w-full h-full flex -mb-5 items-end justify-center">
           <Image
             ref={watchImageRef}
             src="/images/footer-watch-water.jpg"
@@ -247,10 +248,7 @@ const Footer = () => {
             sizes="100vw"
           />
         </div>
-
-        {/* Subtle bottom vignette / deep ocean atmosphere gradient */}
-        <div className="absolute bottom-0 inset-x-0 h-16 sm:h-20 bg-gradient-to-t from-[#02111d]/60 to-transparent pointer-events-none z-10" />
-      </div>
+    </div>
     </footer>
   );
 };
