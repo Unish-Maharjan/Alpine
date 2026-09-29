@@ -147,7 +147,8 @@ export default function Priorities() {
     <section
       ref={rootRef}
       id="priorities"
-      className="relative w-full h-screen overflow-hidden flex items-center justify-center bg-[#e2e6e7] text-primary select-none border-0 border-none outline-none -mb-1"
+      className="relative w-full h-screen overflow-hidden flex items-center
+       justify-center bg-[#e2e6e7] text-primary select-none border-0 border-none outline-none -mb-1"
     >
       {/* HTML5 Canvas Frame Sequence Background */}
       <canvas
@@ -155,10 +156,14 @@ export default function Priorities() {
         className="absolute inset-0 w-full h-full object-cover border-0 border-none outline-none"
       />
 
+      {/* Seamless bottom edge fade gradient to Footer */}
+      <div className="absolute bottom-0 inset-x-0 h-36 sm:h-56 bg-gradient-to-t from-[#d3dedf] via-[#d3dedf]/60 to-transparent z-10 pointer-events-none" />
+
       {/* Editorial Content Overlay */}
       <div
         ref={titleContainerRef}
-        className="relative z-20 max-w-5xl mx-auto px-6 sm:px-12 flex flex-col items-center text-center select-none"
+        className="relative z-20 max-w-5xl mx-auto px-6 sm:px-12 flex flex-col
+        items-center text-center select-none"
       >
         {/* Title above watch */}
         <h2

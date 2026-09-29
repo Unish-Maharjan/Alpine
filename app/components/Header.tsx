@@ -194,9 +194,6 @@ export default function Header({
                 className="font-saldo text-lg sm:text-xl uppercase tracking-widest text-tertiary/90 hover:text-secondary transition-colors duration-200 py-1 border-b border-secondary/10 flex items-center justify-between"
               >
                 <span>{item.label}</span>
-                <span className="text-secondary/60 text-xs font-inter font-normal">
-                  0{idx + 1}
-                </span>
               </Link>
             ))}
             <Link
@@ -213,13 +210,7 @@ export default function Header({
               </span>
             </Link>
           </nav>
-
-          {/* Mobile Footer note */}
-          <div className="pt-4 border-t border-secondary/10 flex items-center justify-between text-xs font-inter text-tertiary/50">
-            <span>Alpine Timepieces</span>
-            <span>Kathmandu, Nepal</span>
-          </div>
-        </div>
+    </div>
       )}
     </header>
   );

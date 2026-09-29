@@ -52,6 +52,16 @@ const POPULAR_WATCHES: Product[] = [
     sale: false,
     href: "/not-found",
   },
+  {
+    id: "aquaracer",
+    index: "04",
+    name: "AQUARACER",
+    collection: "Maritime Heritage",
+    price: "$849",
+    image: "/images/bluecasio.png",
+    sale: false,
+    href: "/not-found",
+  },
 ];
 
 export default function PopularWatches() {
@@ -105,8 +115,7 @@ export default function PopularWatches() {
     <section
       ref={sectionRef}
       id="popular-watches"
-      className="relative z-10 w-full bg-[#fcfbf8] text-primary py-12 sm:py-16 lg:py-12 
-      overflow-hidden select-none"
+      className="relative z-10 w-full bg-[#fcfbf8] text-primary py-12 sm:py-16 lg:py-14 overflow-hidden select-none"
     >
       <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 z-10">
         {/* Centered Editorial Section Header */}
@@ -122,26 +131,26 @@ export default function PopularWatches() {
           </p>
         </div>
 
-        {/* 3-Column Minimalist Product Showcase Grid */}
+        {/* 4-Column Minimalist Product Showcase Grid */}
         <div
           ref={gridRef}
-          className="w-full grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-neutral-200/90 border-t border-b border-neutral-200/90 bg-white/70 backdrop-blur-[1px]"
+          className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-neutral-200/90 border-t border-b border-neutral-200/90 bg-white/70 backdrop-blur-[1px]"
         >
           {POPULAR_WATCHES.map((watch) => (
             <Link
               key={watch.id}
               href={watch.href}
-              className="product-column group relative flex flex-col justify-between text-center px-6 sm:px-8 lg:px-10 py-8 sm:py-12 hover:bg-[#faf8f5]/60 transition-colors duration-400 min-h-[460px] sm:min-h-[500px]"
+              className="product-column group relative flex flex-col justify-between text-center px-4 sm:px-6 lg:px-6 py-8 sm:py-10 hover:bg-[#faf8f5]/60 transition-colors duration-400 min-h-[440px] sm:min-h-[480px]"
             >
               {/* Watch Image Container */}
-              <div className="w-full h-64 sm:h-72 lg:h-80 relative flex items-center justify-center my-6">
-                <div className="relative w-full h-full max-w-[260px] sm:max-w-[280px]">
+              <div className="w-full h-56 sm:h-64 lg:h-72 relative flex items-center justify-center my-4 sm:my-6">
+                <div className="relative w-full h-full max-w-[220px] sm:max-w-[240px]">
                   <Image
                     src={watch.image}
                     alt={watch.name}
                     fill
-                    className="object-contain p-2 group-hover:scale-104 transition-transform duration-500 ease-out drop-shadow-[0_15px_30px_rgba(12,59,60,0.08)]"
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-500 ease-out drop-shadow-[0_15px_30px_rgba(12,59,60,0.08)]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     priority
                   />
                 </div>
@@ -149,7 +158,7 @@ export default function PopularWatches() {
 
               {/* Bottom Metadata: Name, Collection, Price & Minimal Action */}
               <div className="flex flex-col items-center justify-center w-full mt-auto">
-                <h3 className="font-saldo text-xl sm:text-2xl text-primary uppercase font-normal tracking-[0.22em] transition-transform duration-300 group-hover:-translate-y-1">
+                <h3 className="font-saldo text-lg sm:text-xl lg:text-2xl text-primary uppercase font-normal tracking-[0.2em] transition-transform duration-300 group-hover:-translate-y-1">
                   {watch.name}
                 </h3>
 

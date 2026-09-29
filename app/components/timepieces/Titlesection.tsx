@@ -91,7 +91,7 @@ const Titlesection = () => {
       <div className="absolute top-0 inset-x-0 h-32 sm:h-48 bg-gradient-to-b from-[#06334a] via-[#06334a]/60 to-transparent z-10 pointer-events-none" />
 
       {/* Oceanic bottom edge fade to Footer */}
-      <div className="absolute bottom-0 inset-x-0 h-32 sm:h-48 bg-gradient-to-t from-[#06334a] via-[#06334a]/60 to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 inset-x-0 h-40 sm:h-64 bg-gradient-to-t from-[#06334a] via-[#06334a]/70 to-transparent z-10 pointer-events-none" />
 
       {/* Content Layout: 2-Column Responsive Grid */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 grid grid-cols-1 lg:grid-cols-12 items-center gap-10 lg:gap-8 min-h-[50vh]">
@@ -116,15 +116,13 @@ const Titlesection = () => {
           className="lg:col-span-5 flex items-center justify-center lg:justify-end w-full will-change-transform"
         >
           <div className="relative flex items-center justify-center">
-            {/* Ambient luxury gold glow */}
-            <div className="absolute w-44 h-44 sm:w-56 sm:h-56 lg:w-72 lg:h-72 rounded-full bg-[#eadab2]/10 blur-3xl pointer-events-none" />
-
+           
             <Image
               src="/images/watch1.png"
               alt="Alpine Chronograph Luxury Timepiece"
-              width={320}
-              height={320}
-              className="relative z-10 object-contain w-40 sm:w-48 md:w-56 lg:w-64 xl:w-72 max-h-[340px] h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.85)]"
+              width={500}
+              height={500}
+              className="relative z-10 object-contain w-50 sm:w-55 md:w-60 lg:w-65 xl:w-72 max-h-[400px] h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.85)]"
               priority
             />
           </div>

@@ -15,7 +15,7 @@ export default function Imagesequence() {
   const titleContainerRef = useRef<HTMLDivElement | null>(null);
   const taglineRef = useRef<HTMLSpanElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
-  const subRef = useRef<HTMLParagraphElement | null>(null);
+
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -106,7 +106,7 @@ export default function Imagesequence() {
 
       // 3. Reveal "BUILT TO GO DEEP" after image sequence is completed
       if (!reduceMotion) {
-        const textElements = [taglineRef.current, titleRef.current, subRef.current].filter(Boolean);
+        const textElements = [taglineRef.current, titleRef.current].filter(Boolean);
         if (textElements.length > 0) {
           tl.fromTo(
             textElements,
@@ -164,13 +164,6 @@ export default function Imagesequence() {
         >
           BUILT TO GO DEEP
         </h2>
-
-        <p
-          ref={subRef}
-          className="font-inter text-xs sm:text-sm md:text-base tracking-[0.25em] uppercase text-secondary-light/95 mt-4 opacity-0 font-medium drop-shadow-[0_4px_18px_rgba(0,0,0,0.95)]"
-        >
-          Engineered to Conquer the Abyss
-        </p>
       </div>
     </section>
   );
