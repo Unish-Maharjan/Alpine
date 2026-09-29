@@ -28,6 +28,7 @@ const WatchAnimation = () => {
           end: "bottom 35%",
           scrub: 1.2,
           invalidateOnRefresh: true,
+          refreshPriority: -1,
         },
       });
 
