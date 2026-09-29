@@ -77,7 +77,7 @@ export default function Preloader() {
           0% {
             transform: translate(-50%, -100%) rotate(0deg);
           }
-          25% {
+          100% {
             transform: translate(-50%, -100%) rotate(360deg);
           }
         }

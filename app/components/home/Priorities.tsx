@@ -7,7 +7,7 @@ import Button from "@/app/ui/Button";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const START_FRAME = 9;
+const START_FRAME = 47;
 const TOTAL_FRAMES = 120;
 
 export default function Priorities() {
@@ -16,6 +16,7 @@ export default function Priorities() {
   const titleContainerRef = useRef<HTMLDivElement | null>(null);
   const headingRef = useRef<HTMLHeadingElement | null>(null);
   const buttonRef = useRef<HTMLDivElement | null>(null);
+  const gradientRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -25,7 +26,7 @@ export default function Priorities() {
     const ctx2d = canvas.getContext("2d");
     if (!ctx2d) return;
 
-    // Preload image frame sequence array starting from frame 9
+    // Preload image frame sequence array starting from frame 47
     const images: HTMLImageElement[] = [];
     const frameObj = { frame: START_FRAME };
 
@@ -49,7 +50,8 @@ export default function Priorities() {
         const centerShiftX = (canvas.width - img.width * ratio) / 2;
         const centerShiftY = (canvas.height - img.height * ratio) / 2;
 
-        ctx2d.clearRect(0, 0, canvas.width, canvas.height);
+        ctx2d.fillStyle = "#e2e6e7";
+        ctx2d.fillRect(0, 0, canvas.width, canvas.height);
         ctx2d.drawImage(
           img,
           0,
@@ -93,7 +95,7 @@ export default function Priorities() {
         },
       });
 
-      // 1. Scrub canvas frame sequence starting from frame 9 to 120
+      // 1. Scrub canvas frame sequence starting from frame 47 to 120
       tl.to(
         frameObj,
         {
@@ -130,9 +132,26 @@ export default function Priorities() {
           },
           0.62
         );
+
+        // 3. Fade in bottom gradient to footer AFTER text content appears
+        if (gradientRef.current) {
+          tl.fromTo(
+            gradientRef.current,
+            { opacity: 0 },
+            {
+              opacity: 1,
+              ease: "power2.out",
+              duration: 0.35,
+            },
+            0.75
+          );
+        }
       } else {
         if (titleContainerRef.current) {
           tl.to(titleContainerRef.current, { opacity: 1, duration: 0.2 }, 0.65);
+        }
+        if (gradientRef.current) {
+          tl.to(gradientRef.current, { opacity: 1, duration: 0.2 }, 0.75);
         }
       }
     }, root);
@@ -156,8 +175,11 @@ export default function Priorities() {
         className="absolute inset-0 w-full h-full object-cover border-0 border-none outline-none"
       />
 
-      {/* Seamless bottom edge fade gradient to Footer */}
-      <div className="absolute bottom-0 inset-x-0 h-36 sm:h-56 bg-gradient-to-t from-[#d3dedf] via-[#d3dedf]/60 to-transparent z-10 pointer-events-none" />
+      {/* Seamless bottom edge fade gradient to Footer (revealed after text appears) */}
+      <div
+        ref={gradientRef}
+        className="absolute bottom-0 inset-x-0 h-36 sm:h-56 bg-gradient-to-t from-[#d3dedf] via-[#d3dedf]/60 to-transparent z-10 pointer-events-none opacity-0 will-change-transform"
+      />
 
       {/* Editorial Content Overlay */}
       <div

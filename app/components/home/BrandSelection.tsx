@@ -5,110 +5,142 @@ import Image from "next/image";
 import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface BrandItem {
   id: string;
   name: string;
-  image: string;
-  titleClass?: string;
+  logo: string;
+  href: string;
+  scaleClass?: string;
 }
 
 const BRANDS: BrandItem[] = [
   {
     id: "01",
     name: "CASIO",
-    image: "/images/watch1.png",
+    logo: "/logo/casio-logo.png",
+    href: "/not-found",
+    scaleClass: "scale-125 sm:scale-135 lg:scale-145",
   },
   {
     id: "02",
     name: "CITIZEN",
-    image: "/images/watch2.avif",
+    logo: "/logo/citizen-logo.png",
+    href: "/not-found",
+    scaleClass: "scale-135 sm:scale-145 lg:scale-155",
   },
   {
     id: "03",
     name: "G-SHOCK",
-    image: "/images/watch5.png",
+    logo: "/logo/gshock-logo.png",
+    href: "/not-found",
+    scaleClass: "scale-130 sm:scale-140 lg:scale-150",
   },
   {
     id: "04",
-    name: "RHYTHM",
-    image: "/images/watch4.avif",
+    name: "DANIEL KLEIN",
+    logo: "/logo/daniel-logo.png",
+    href: "/not-found",
+    scaleClass: "scale-100",
   },
   {
     id: "05",
-    name: "DANIEL KLEIN",
-    image: "/images/watch3.avif",
-  },
-  {
-    id: "06",
-    name: "Q&Q",
-    image: "/images/animatedImage.png",
+    name: "RHYTHM",
+    logo: "/logo/Rhythm.png",
+    href: "/not-found",
+    scaleClass: "scale-110 sm:scale-120 lg:scale-100",
   },
 ];
 
 export default function BrandSelection() {
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!trackRef.current) return;
+
+      // Duplicate list is rendered twice to make seamless infinite loop (-50%)
+      const animation = gsap.to(trackRef.current, {
+        xPercent: -50,
+        ease: "none",
+        duration: 18,
+        repeat: -1,
+      });
+
+      // Pause/slow on hover for interactive polish
+      const slider = sliderRef.current;
+      if (slider) {
+        const onEnter = () => gsap.to(animation, { timeScale: 0.2, duration: 0.4 });
+        const onLeave = () => gsap.to(animation, { timeScale: 1, duration: 0.4 });
+
+        slider.addEventListener("mouseenter", onEnter);
+        slider.addEventListener("mouseleave", onLeave);
+
+        return () => {
+          slider.removeEventListener("mouseenter", onEnter);
+          slider.removeEventListener("mouseleave", onLeave);
+          animation.kill();
+        };
+      }
+    },
+    { scope: sliderRef }
+  );
+
+  // Repeat the array twice for an uninterrupted infinite loop
+  const displayBrands = [...BRANDS, ...BRANDS];
+
   return (
     <section
       id="brandselection"
-      className="relative z-10 w-full bg-primary text-secondary pt-16 sm:pt-24 flex flex-col justify-center overflow-hidden"
+      ref={sliderRef}
+      className="relative z-10 w-full bg-[#f7f5ef] pt-14 sm:pt-18 lg:pt-20 pb-14
+       sm:pb-18 lg:pb-20 overflow-hidden select-none"
     >
-      {/* Editorial Section Heading */}
-      <div className="text-center mb-12 sm:mb-16 px-6 max-w-4xl mx-auto will-change-transform">
-        <h2 className="font-saldo text-3xl sm:text-5xl md:text-6xl uppercase font-normal text-secondary mb-3">
+      {/* Editorial Section Header */}
+      <div className="text-center max-w-3xl -mt-8 sm:mt-1 mx-auto mb-12 sm:mb-14 px-6 flex flex-col items-center">
+        <h2 className="font-saldo text-3xl sm:text-4xl md:text-5xl uppercase 
+        font-normal text-primary tracking-tight leading-[1.08]">
           THE NAMES WE CARRY
         </h2>
-        <p className="font-inter text-sm sm:text-base text-tertiary/80 font-light max-w-xl mx-auto">
+        <p className="font-inter text-xs sm:text-sm text-primary/70 font-light mt-2.5 leading-relaxed max-w-xl mx-auto">
           Discover the master watchmakers behind the timepieces we curate.
         </p>
       </div>
 
-      {/* 3-Column Full-Width Grid in Primary Color (each item is 80vh) */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-b border-secondary/20">
-        {BRANDS.map((brand, idx) => (
-          <Link
-            key={brand.id}
-            href="/not-found"
-            className={`editorial-brand-card group relative w-full h-[80vh] bg-primary border-b
-               border-secondary/20 md:border-r transition-all duration-500 will-change-transform 
-               flex flex-col items-center justify-center text-center overflow-hidden
-              hover:bg-primary-surface/40 ${
-              (idx + 1) % 3 === 0 ? "lg:border-r-0" : ""
-            } ${idx >= 3 ? "lg:border-b-0" : ""}`}
-          >
-            {/* Inner Refined Hairline Frame */}
-            <div className="absolute inset-5 sm:inset-7 lg:inset-9 border
-             border-secondary/20 pointer-events-none transition-all duration-500
-              group-hover:border-secondary/55 group-hover:inset-4 sm:group-hover:inset-6
-               lg:group-hover:inset-8 z-20" />
+      {/* Subtle edge fade gradients */}
+      <div className="absolute left-0 inset-y-0 w-16 sm:w-32 bg-gradient-to-r from-[#f7f5ef] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 inset-y-0 w-16 sm:w-32 bg-gradient-to-l from-[#f7f5ef] to-transparent z-10 pointer-events-none" />
 
-            {/* Watch Imagery on Hover */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none 
-            overflow-hidden select-none z-0">
-              <div className="relative w-3/4 h-3/4 opacity-0 scale-90 translate-y-4 group-hover:opacity-85 group-hover:scale-110 group-hover:translate-y-0 transition-all duration-700 ease-out drop-shadow-[0_15px_30px_rgba(0,0,0,0.5)]">
-                <Image
-                  src={brand.image}
-                  alt={`${brand.name} Timepiece`}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
+      {/* Infinite Horizontal Brand Slider (fits exactly 4 brands on desktop) */}
+      <div className="w-full overflow-hidden flex">
+        <div
+          ref={trackRef}
+          className="flex items-center will-change-transform shrink-0 w-max"
+        >
+          {displayBrands.map((brand, idx) => (
+            <div
+              key={`${brand.id}-${idx}`}
+              className="w-[50vw] sm:w-[33.333vw] lg:w-[25vw] shrink-0 flex items-center justify-center px-4 sm:px-8 lg:px-12"
+            >
+              <Link
+                href={brand.href}
+                className="group relative h-20 sm:h-24 md:h-28 lg:h-32 w-48 sm:w-60 md:w-72 lg:w-80 flex items-center justify-center opacity-85 hover:opacity-100 hover:scale-105 transition-all duration-300"
+                aria-label={brand.name}
+              >
+                <div className={`relative w-full h-full flex items-center justify-center transition-transform duration-300 ${brand.scaleClass || ""}`}>
+                  <Image
+                    src={brand.logo}
+                    alt={`${brand.name} Logo`}
+                    fill
+                    sizes="(max-width: 640px) 220px, (max-width: 1024px) 280px, 360px"
+                    className="object-contain p-1"
+                  />
+                </div>
+              </Link>
             </div>
-
-            {/* Brand Name Title */}
-            <div className="relative z-10 px-6 select-none transition-transform duration-500 group-hover:scale-105">
-              <h3 className="font-saldo text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-secondary uppercase font-normal tracking-widest group-hover:text-secondary-light drop-shadow-sm transition-colors duration-300">
-                {brand.name}
-              </h3>
-              <span className="font-inter text-[11px] tracking-[0.25em] text-secondary/80 uppercase block mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium">
-                Explore Collection
-              </span>
-            </div>
-          </Link>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

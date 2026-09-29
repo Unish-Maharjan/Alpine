@@ -1,96 +1,93 @@
 "use client";
 
-import React, { useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface WatchAnimationProps {
-  triggerRef?: React.RefObject<HTMLElement | null>;
-}
-
-const WatchAnimation = ({ triggerRef }: WatchAnimationProps) => {
+const WatchAnimation = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const watchRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      const targetTrigger = triggerRef?.current || containerRef.current;
-      if (!targetTrigger || !watchRef.current) return;
+      if (!watchRef.current) return;
+
+      const triggerEl =
+        document.getElementById("titlesection") ||
+        containerRef.current ||
+        watchRef.current;
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: targetTrigger,
-          start: "top 95%",
-          end: "bottom 20%",
+          trigger: triggerEl,
+          start: "top 85%",
+          end: "bottom 35%",
           scrub: 1.2,
+          invalidateOnRefresh: true,
         },
       });
 
       tl.fromTo(
         watchRef.current,
         {
-          y: -140,
+          yPercent: -80,
           opacity: 0,
-          scale: 1.25,
-          rotate: -8,
-        },
-        {
-          y: 0,
-          opacity: 1,
           scale: 1,
-          rotate: 0,
-          ease: "power2.out",
-        }
-      ).to(
-        watchRef.current,
-        {
-          y: 60,
-          scale: 0.92,
-          rotate: 4,
-          ease: "power1.inOut",
+          xPercent: 0,
         },
-        "+=0.1"
-      );
+        {
+          yPercent: -10,
+          opacity: 1,
+          ease: "power2.out",
+          duration: 1,
+        }
+      ).to(watchRef.current, {
+        yPercent: 100,
+        scale: 0.65,
+        xPercent: 10,
+        ease: "power1.inOut",
+        duration: 1.5,
+      });
 
-      if (glowRef.current) {
-        gsap.to(glowRef.current, {
-          scale: 1.25,
-          opacity: 0.45,
-          duration: 3.5,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-      }
+      // Recalculate ScrollTrigger positions once hero sequence pins are mounted
+      const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 250);
+
+      const handleLoad = () => {
+        ScrollTrigger.refresh();
+      };
+      window.addEventListener("load", handleLoad);
+
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener("load", handleLoad);
+        tl.kill();
+      };
     },
-    { scope: containerRef, dependencies: [triggerRef] }
+    { scope: containerRef }
   );
 
   return (
     <div
       ref={containerRef}
-      className="relative w-full flex items-center justify-center select-none py-6"
+      className="flex justify-center items-center absolute z-50 w-full 
+      translate-x-80 translate-y-40 min-h-80 overflow-visible pointer-events-none"
     >
       <div
-        ref={glowRef}
-        className="absolute w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 rounded-full bg-gradient-to-tr from-[#eadab2]/15 via-[#0f4445]/30 to-transparent blur-3xl pointer-events-none z-0"
-      />
-
-      <div
         ref={watchRef}
-        className="relative z-10 flex items-center justify-center will-change-transform drop-shadow-[0_20px_45px_rgba(0,0,0,0.85)]"
+        className="relative w-full flex items-center justify-center will-change-transform"
       >
         <Image
-          src="/images/watch1.png"
+          src="/images/bluecasio.png"
           alt="Alpine Chronograph Luxury Timepiece"
-          width={320}
-          height={320}
-          className="object-contain w-40 sm:w-48 md:w-56 lg:w-64 xl:w-72 max-h-[340px] h-auto max-w-none"
+          width={250}
+          height={250}
+          className="object-contain w-auto z-100 h-60 sm:h-96 lg:h-96 xl:h-128 max-w-none"
           priority
         />
       </div>

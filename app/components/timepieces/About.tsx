@@ -39,6 +39,7 @@ export default function TimepiecesAbout() {
   return (
     <section
       ref={containerRef}
+      id="timepieces-about"
       className="relative min-h-screen py-28 sm:py-36 flex items-center 
       -mt-1 justify-center overflow-hidden bg-[#06334a]"
     >

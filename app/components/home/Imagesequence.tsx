@@ -129,6 +129,9 @@ export default function Imagesequence() {
       }
     }, root);
 
+    // Refresh ScrollTrigger so all downstream components (like WatchAnimation) receive correct pin offsets
+    ScrollTrigger.refresh();
+
     return () => {
       window.removeEventListener("resize", handleResize);
       ctx.revert();

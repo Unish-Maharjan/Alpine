@@ -12,7 +12,6 @@ gsap.registerPlugin(ScrollTrigger);
 const Titlesection = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const watchRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(
     () => {
@@ -35,38 +34,6 @@ const Titlesection = () => {
           },
         }
       );
-
-      // 2. Watch entrance & parallax animation on the right side
-      if (watchRef.current) {
-        gsap.fromTo(
-          watchRef.current,
-          { opacity: 0, y: 60, scale: 0.92 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 1.3,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 75%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-
-        // Gentle parallax float on scroll
-        gsap.to(watchRef.current, {
-          y: -25,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1.2,
-          },
-        });
-      }
     },
     { scope: sectionRef }
   );
@@ -107,24 +74,6 @@ const Titlesection = () => {
             <Button href="/not-found" variant="gold" size="md">
               Explore More
             </Button>
-          </div>
-        </div>
-
-        {/* Right Column: Watch image positioned on the right side */}
-        <div
-          ref={watchRef}
-          className="lg:col-span-5 flex items-center justify-center lg:justify-end w-full will-change-transform"
-        >
-          <div className="relative flex items-center justify-center">
-           
-            <Image
-              src="/images/watch1.png"
-              alt="Alpine Chronograph Luxury Timepiece"
-              width={500}
-              height={500}
-              className="relative z-10 object-contain w-50 sm:w-55 md:w-60 lg:w-65 xl:w-72 max-h-[400px] h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.85)]"
-              priority
-            />
           </div>
         </div>
       </div>

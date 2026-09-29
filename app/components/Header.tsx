@@ -115,13 +115,16 @@ export default function Header({
           </div>
 
           {/* CENTER: Visually Centered Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-10 xl:space-x-14 absolute left-1/2
-           -translate-x-1/2 z-10">
+          <nav className="hidden lg:flex items-center space-x-8 xl:space-x-12 absolute
+           left-1/2 -translate-x-1/2 z-10">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className={`font-saldo text-[13px] tracking-widest uppercase transition-all duration-300 relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1px] hover:after:w-full after:transition-all after:duration-300 ${linkClass}`}
+                className={`font-saldo text-[15px] xl:text-[16px] tracking-wider uppercase
+                   transition-all duration-300 relative py-1 after:content-[''] 
+                   after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px]
+                    hover:after:w-full after:transition-all after:duration-300 ${linkClass}`}
               >
                 {item.label}
               </Link>
@@ -186,12 +189,12 @@ export default function Header({
           isDarkTheme ? "bg-[#06334a]" : "bg-[#0c3b3c]"
         } border-b border-secondary/15 px-8 py-10 shadow-2xl flex flex-col justify-between space-y-8 animate-in fade-in slide-in-from-top-4 duration-300`}>
           <nav className="flex flex-col space-y-6">
-            {NAV_ITEMS.map((item, idx) => (
+            {NAV_ITEMS.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="font-saldo text-lg sm:text-xl uppercase tracking-widest text-tertiary/90 hover:text-secondary transition-colors duration-200 py-1 border-b border-secondary/10 flex items-center justify-between"
+                className="font-saldo text-xl sm:text-2xl uppercase tracking-wider text-tertiary/90 hover:text-secondary transition-colors duration-200 py-1.5 border-b border-secondary/10 flex items-center justify-between"
               >
                 <span>{item.label}</span>
               </Link>
@@ -199,10 +202,10 @@ export default function Header({
             <Link
               href="/not-found"
               onClick={() => setMobileMenuOpen(false)}
-              className="font-saldo text-lg sm:text-xl uppercase tracking-widest text-secondary hover:text-secondary-light transition-colors duration-200 py-1 border-b border-secondary/10 flex items-center justify-between"
+              className="font-saldo text-xl sm:text-2xl uppercase tracking-wider text-secondary hover:text-secondary-light transition-colors duration-200 py-1.5 border-b border-secondary/10 flex items-center justify-between"
             >
-              <span className="flex items-center gap-2">
-                <User size={18} />
+              <span className="flex items-center gap-2.5">
+                <User size={20} />
                 <span>Log In</span>
               </span>
               <span className="text-secondary/60 text-xs font-inter font-normal">
@@ -210,7 +213,7 @@ export default function Header({
               </span>
             </Link>
           </nav>
-    </div>
+        </div>
       )}
     </header>
   );

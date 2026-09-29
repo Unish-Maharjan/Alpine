@@ -12,11 +12,13 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen lg:h-screen flex items-center bg-white text-primary overflow-hidden"
+      className="relative w-full min-h-screen lg:h-screen flex items-center
+       bg-white text-primary overflow-hidden"
     >
       <div className="w-full h-full min-h-screen flex flex-col lg:flex-row relative z-10">
         {/* Content Column (Left Side) */}
-        <div className="w-full lg:w-1/2 flex flex-col items-center justify-center text-center px-6 sm:px-12 lg:px-16 xl:px-20 py-24 sm:py-28 lg:py-16 h-full z-10 bg-white">
+        <div className="w-full lg:w-1/2 flex flex-col items-center justify-center text-center
+         px-6 sm:px-12 lg:px-16 xl:px-20 py-24 sm:py-28 lg:py-16 h-full z-10 bg-white">
           {/* Logo Emblem */}
           <div className="relative mb-6">
             <NextImage
@@ -30,13 +32,15 @@ const Hero = () => {
           </div>
 
           {/* Main Headline */}
-          <h1 className="font-saldo text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-primary uppercase font-normal max-w-xl leading-tight">
+          <h1 className="font-saldo text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+           text-primary uppercase font-normal max-w-xl leading-tight">
             WELCOME
             <span className="block mt-2 font-medium">TO ALPINE</span>
           </h1>
 
           {/* Tagline */}
-          <p className="font-inter text-sm sm:text-base md:text-lg text-primary/85 uppercase font-medium mt-6 mb-9 max-w-md tracking-wider">
+          <p className="font-inter text-sm sm:text-base md:text-lg text-primary/85 
+          font-medium mt-6 mb-9 max-w-md tracking-wider">
             A Moment Worth Wearing
           </p>
 
