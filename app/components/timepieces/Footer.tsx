@@ -67,11 +67,11 @@ const Footer = ({ variant = "blue" }: FooterProps) => {
       id="contact"
       className="relative w-full min-h-screen bg-[#06334a] text-[#f8f6f0] flex flex-col justify-between overflow-hidden select-none border-0 outline-none pt-12 sm:pt-16 lg:pt-20"
     >
-      <div className="relative z-10 w-full px-6 sm:px-10 lg:px-14 xl:px-16 flex flex-col justify-between flex-1">
+      <div className="relative z-10 w-full px-4 sm:px-10 lg:px-14 xl:px-16 flex flex-col justify-between flex-1">
         {/* FOUR COLUMNS CONTENT */}
         <div
           ref={columnsRef}
-          className="grid grid-cols-2 md:grid-cols-4 gap-x-8 lg:gap-x-14 gap-y-8 w-full max-w-5xl pl-[10px] ml-5"
+          className="grid grid-cols-2 md:grid-cols-4 gap-x-6 sm:gap-x-8 lg:gap-x-14 gap-y-8 w-full max-w-5xl pl-0 sm:pl-[10px] ml-0 sm:ml-5"
         >
           {/* Column 1: INFORMATION */}
           <div>

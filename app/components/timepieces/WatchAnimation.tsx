@@ -77,7 +77,8 @@ const WatchAnimation = () => {
     <div
       ref={containerRef}
       className="flex justify-center items-center absolute z-50 w-full 
-      translate-x-80 translate-y-40 min-h-80 overflow-visible pointer-events-none"
+      translate-x-0 sm:translate-x-28 md:translate-x-48 lg:translate-x-72 xl:translate-x-80 
+      translate-y-16 sm:translate-y-24 lg:translate-y-40 min-h-60 sm:min-h-80 overflow-visible pointer-events-none"
     >
       <div
         ref={watchRef}
@@ -88,7 +89,7 @@ const WatchAnimation = () => {
           alt="Alpine Chronograph Luxury Timepiece"
           width={250}
           height={250}
-          className="object-contain w-auto z-100 h-60 sm:h-96 lg:h-96 xl:h-128 max-w-none"
+          className="object-contain w-auto z-100 h-48 sm:h-72 md:h-80 lg:h-96 xl:h-128 max-w-none"
           priority
         />
       </div>
